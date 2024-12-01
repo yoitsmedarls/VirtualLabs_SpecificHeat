@@ -1,93 +1,87 @@
-// #include "Metal.hpp"
+#include "Metal.hpp"
 
-// #include <iostream>
+#include <iostream>
+#include <cmath>
 
-// /* Special methods */
+/* Special methods */
 
-// Metal::Metal()
-// {
-//     std::cout << "Metal | Default constructor called..." << std::endl;
-// }
+Metal::Metal()
+    : Substance(),
+      m_sideLength(0),
+      m_isSubmerged(false)
+{
+    std::cout << "Metal | Default constructor called..." << std::endl;
+}
 
-// Metal::Metal(double mass, double temperature, double specificHeatCapacity,
-//              double length, double width, double height)
-//     : Substance(mass, temperature, specificHeatCapacity)
-// {
-//     std::cout << "Metal | Constructor called..." << std::endl;
+Metal::Metal(std::string name, double mass, double temperature, double specificHeatCapacity, double density)
+    : Substance(name, mass, temperature, specificHeatCapacity, density),
+      m_sideLength(std::cbrt(mass / density)),
+      m_isSubmerged(false)
+{
+    std::cout << "Metal | Constructor called..." << std::endl;
+}
 
-//     m_length = length;
-//     m_width = width;
-//     m_height = height;
-//     m_volume = length * width * height;
-// }
+Metal::Metal(const Metal &copy)
+    : Substance(copy),
+      m_sideLength(copy.m_sideLength),
+      m_isSubmerged(copy.m_isSubmerged)
+{
+    std::cout << "Metal | Copy constructor called..." << std::endl;
+}
 
-// Metal::Metal(const Metal &copy)
-// {
-//     std::cout << "Metal | Copy constructor called..." << std::endl;
-// }
+Metal::~Metal()
+{
+    std::cout << "Metal | Destructor called..." << std::endl;
+}
 
-// Metal::~Metal()
-// {
-//     std::cout << "Metal | Destructor called..." << std::endl;
-// }
+/* Operator overloads */
 
-// /* Operator overloads */
+Metal &Metal::operator=(const Metal &copy)
+{
+    std::cout << "Metal | Copy assignment operator used..." << std::endl;
 
-// Metal &Metal::operator=(const Metal &copy)
-// {
-//     std::cout << "Metal | Copy assignment operator used..." << std::endl;
+    if (&copy == this)
+    {
+        return *this;
+    }
 
-//     if (&copy == this)
-//     {
-//         return *this;
-//     }
-// }
+    return *this;
+}
 
-// /* Getters */
+/* Getters */
 
-// double Metal::getLength()
-// {
-//     return m_length;
-// }
+double Metal::getSideLength()
+{
+    return m_sideLength;
+}
 
-// double Metal::getWidth()
-// {
-//     return m_width;
-// }
+void Metal::setDensity(double density)
+{
+    Substance::setDensity(density);
+    updateSideLength();
+}
 
-// double Metal::getHeight()
-// {
-//     return m_height;
-// }
+void Metal::setMass(double mass)
+{
+    Substance::setMass(mass);
+    updateSideLength();
+}
 
-// double Metal::getVolume()
-// {
-//     return m_volume;
-// }
+/* Other methods */
 
-// /* Setters */
+bool Metal::isMetalSubmerged()
+{
+    return m_isSubmerged;
+}
 
-// void Metal::setLength(double length)
-// {
-//     m_length = length;
-//     updateMetalVolume();
-// }
+void Metal::updateSideLength()
+{
+    m_sideLength = std::cbrt(m_volume);
+}
 
-// void Metal::setWidth(double width)
-// {
-//     m_width = width;
-//     updateMetalVolume();
-// }
-
-// void Metal::setHeight(double height)
-// {
-//     m_height = m_height;
-//     updateMetalVolume();
-// }
-
-// /* Other methods */
-
-// void Metal::updateMetalVolume()
-// {
-//     m_volume = m_length * m_width * m_height;
-// }
+void Metal::printProperties()
+{
+    Substance::printProperties();
+    std::cout << " SideLength: " << m_sideLength << "\n"
+              << " IsSubmerged: " << m_isSubmerged << "\n";
+}

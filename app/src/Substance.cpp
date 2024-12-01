@@ -4,35 +4,43 @@
 
 /* Special methods */
 
-Substance::Substance() : m_name(""), m_mass(0), m_temperature(0), m_specificHeatCapacity(0), m_density(0), m_volume(0), m_isContained(false)
+Substance::Substance()
+    : m_name(""),
+      m_mass(0),
+      m_temperature(0),
+      m_specificHeatCapacity(0),
+      m_density(0),
+      m_volume(0),
+      m_isContained(false)
 {
+    // I don't really know why I use initializer lists (0)
     std::cout << "Substance | Default constructor called..." << std::endl;
 }
 
 Substance::Substance(std::string name, double mass, double temperature, double specificHeatCapacity, double density)
+    : m_name(name),
+      m_mass(mass),
+      m_temperature(temperature),
+      m_specificHeatCapacity(specificHeatCapacity),
+      m_density(density),
+      m_volume(mass / density),
+      m_isContained(false)
 {
+    // I don't really know why I use initializer lists (1)
     std::cout << "Substance | Constructor called..." << std::endl;
-
-    this->m_name = name;
-    this->m_mass = mass;
-    this->m_temperature = temperature;
-    this->m_specificHeatCapacity = specificHeatCapacity;
-    this->m_density = density;
-    this->m_volume = mass / density;
-    this->m_isContained = false;
 }
 
 Substance::Substance(const Substance &copy)
+    : m_name(copy.m_name),
+      m_mass(copy.m_mass),
+      m_temperature(copy.m_temperature),
+      m_specificHeatCapacity(copy.m_specificHeatCapacity),
+      m_density(copy.m_density),
+      m_volume(copy.m_volume),
+      m_isContained(copy.m_isContained)
 {
+    // I don't really know why I use initializer lists (2)
     std::cout << "Substance | Copy constructor called..." << std::endl;
-
-    this->m_name = copy.m_name;
-    this->m_mass = copy.m_mass;
-    this->m_temperature = copy.m_temperature;
-    this->m_specificHeatCapacity = copy.m_specificHeatCapacity;
-    this->m_density = copy.m_density;
-    this->m_volume = copy.m_volume;
-    this->m_isContained = copy.m_isContained;
 }
 
 Substance::~Substance()
@@ -58,79 +66,82 @@ Substance &Substance::operator=(const Substance &copy)
 
 std::string Substance::getName()
 {
-    return this->m_name;
+    return m_name;
 }
 
 double Substance::getMass()
 {
-    return this->m_mass;
+    return m_mass;
 }
 
 double Substance::getTemperature()
 {
-    return this->m_temperature;
+    return m_temperature;
 }
 
 double Substance::getSpecificHeatCapacity()
 {
-    return this->m_specificHeatCapacity;
+    return m_specificHeatCapacity;
 }
 
 double Substance::getDensity()
 {
-    return this->m_density;
+    return m_density;
 }
 
 double Substance::getVolume()
 {
-    return this->m_volume;
+    return m_volume;
 }
 
 /* Setters */
 
 void Substance::setName(std::string name)
 {
-    this->m_name = name;
+    m_name = name;
 }
 
 void Substance::setMass(double mass)
 {
-    this->m_mass = mass;
+    m_mass = mass;
+    updateVolume();
 }
 
 void Substance::setTemperature(double temperature)
 {
-    this->m_temperature = temperature;
+    m_temperature = temperature;
 }
 
 void Substance::setSpecificHeatCapacity(double specificHeatCapacity)
 {
-    this->m_specificHeatCapacity = specificHeatCapacity;
+    m_specificHeatCapacity = specificHeatCapacity;
 }
 
 void Substance::setDensity(double density)
 {
-    this->m_density = density;
+    m_density = density;
+    updateVolume();
 }
+
+/* Other methods */
 
 bool Substance::isSubstanceContained()
 {
-    return this->m_isContained;
+    return m_isContained;
 }
 
 void Substance::updateVolume()
 {
-    this->m_volume = this->m_mass / this->m_density;
+    m_volume = m_mass / m_density;
 }
 
 void Substance::printProperties()
 {
-    std::cout << this->m_name << " Properties:" << "\n"
-              << " Mass: " << this->m_mass << "\n"
-              << " Temperature: " << this->m_temperature << "\n"
-              << " SpecificHeatCapacity: " << this->m_specificHeatCapacity << "\n"
-              << " Density: " << this->m_density << "\n"
-              << " Volume: " << this->m_volume << "\n"
-              << " IsContained: " << this->m_isContained << "\n"
-              << std::endl;
+    std::cout << m_name << " Properties:" << "\n"
+              << " Mass: " << m_mass << "\n"
+              << " Temperature: " << m_temperature << "\n"
+              << " SpecificHeatCapacity: " << m_specificHeatCapacity << "\n"
+              << " Density: " << m_density << "\n"
+              << " Volume: " << m_volume << "\n"
+              << " IsContained: " << m_isContained << "\n";
 }

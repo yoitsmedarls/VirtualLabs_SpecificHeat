@@ -1,18 +1,25 @@
 #include <iostream>
-#include "Liquid.hpp"
 #include "Substance.hpp"
+#include "Liquid.hpp"
+#include "Metal.hpp"
 
 int main()
 {
-    Liquid water = Liquid("Water", 100, 25, 4186, 1, 100, 0);
     Substance mySubstance = Substance("My Substance", 100, 24, 4231, 1);
+    Liquid water = Liquid("Water", 100, 25, 4186, 1, 100, 0);
+    Metal aluminum = Metal("Aluminum", 50, 20, 903, 2.7);
 
-    std::cout << &water << std::endl;
-    std::cout << sizeof(water) << std::endl;
-    std::cout << sizeof(mySubstance) << std::endl;
+    mySubstance.printProperties();
+    std::cout << " Address: " << &mySubstance << "\n"
+              << " Size (bytes): " << sizeof(mySubstance) << "\n";
 
     water.printProperties();
-    mySubstance.printProperties();
+    std::cout << " Address: " << &water << "\n"
+              << " Size (bytes): " << sizeof(water) << "\n";
+
+    aluminum.printProperties();
+    std::cout << " Address: " << &aluminum << "\n"
+              << " Size (bytes): " << sizeof(aluminum) << "\n";
 
     return EXIT_SUCCESS;
 }

@@ -5,26 +5,28 @@
 /* Special methods */
 
 Liquid::Liquid()
+    : Substance(),
+      m_boilingPoint(0),
+      m_freezingPoint(0)
 {
     std::cout << "Liquid | Default constructor called..." << std::endl;
 }
 
-Liquid::Liquid(std::string name, double mass, double temperature, double specificHeatCapacity,
-               double density, double boilingPoint, double freezingPoint)
-    : Substance(name, mass, temperature, specificHeatCapacity, density)
+Liquid::Liquid(std::string name, double mass, double temperature, double specificHeatCapacity, double density,
+               double boilingPoint, double freezingPoint)
+    : Substance(name, mass, temperature, specificHeatCapacity, density),
+      m_boilingPoint(boilingPoint),
+      m_freezingPoint(freezingPoint)
 {
     std::cout << "Liquid | Constructor called..." << std::endl;
-
-    this->m_boilingPoint = boilingPoint;
-    this->m_freezingPoint = freezingPoint;
 }
 
 Liquid::Liquid(const Liquid &copy)
+    : Substance(copy),
+      m_boilingPoint(copy.m_boilingPoint),
+      m_freezingPoint(copy.m_freezingPoint)
 {
     std::cout << "Liquid | Copy constructor called..." << std::endl;
-
-    this->m_boilingPoint = copy.m_boilingPoint;
-    this->m_freezingPoint = copy.m_freezingPoint;
 }
 Liquid::~Liquid()
 {
@@ -41,43 +43,38 @@ Liquid &Liquid::operator=(const Liquid &copy)
     {
         return *this;
     }
+
+    return *this;
 }
 
 /* Getters */
 
 double Liquid::getBoilingPoint()
 {
-    return this->m_boilingPoint;
+    return m_boilingPoint;
 }
 
 double Liquid::getFreezingPoint()
 {
-    return this->m_freezingPoint;
+    return m_freezingPoint;
 }
 
 /* Setters */
 
 void Liquid::setBoilingPoint(double boilingPoint)
 {
-    this->m_boilingPoint = boilingPoint;
+    m_boilingPoint = boilingPoint;
 }
 void Liquid::setFreezingPoint(double freezingPoint)
 {
-    this->m_freezingPoint = freezingPoint;
-}
-
-void Liquid::printProperties()
-{
-    std::cout << this->m_name << " Properties:" << "\n"
-              << " Mass: " << this->m_mass << "\n"
-              << " Temperature: " << this->m_temperature << "\n"
-              << " SpecificHeatCapacity: " << this->m_specificHeatCapacity << "\n"
-              << " Density: " << this->m_density << "\n"
-              << " Volume: " << this->m_volume << "\n"
-              << " IsContained: " << this->m_isContained << "\n"
-              << " Boiling Point: " << this->m_boilingPoint << "\n"
-              << " Freezing Point: " << this->m_freezingPoint << "\n"
-              << std::endl;
+    m_freezingPoint = freezingPoint;
 }
 
 /* Other methods */
+
+void Liquid::printProperties()
+{
+    Substance::printProperties();
+    std::cout << " BoilingPoint: " << m_boilingPoint << "\n"
+              << " FreezingPoint: " << m_freezingPoint << "\n";
+}
