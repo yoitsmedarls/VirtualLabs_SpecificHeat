@@ -17,8 +17,11 @@ add_executable(main app/src/main.cpp)
 target_link_libraries(main PRIVATE sfml-graphics)
 target_compile_features(main PRIVATE cxx_std_17)
 
-add_executable(test app/src/oop_test.cpp app/src/Substance.cpp app/src/Liquid.cpp app/src/Metal.cpp)
-target_compile_features(test PRIVATE cxx_std_17)
+add_executable(test_substance app/src/__test_substance.cpp app/src/Substance.cpp app/src/Liquid.cpp app/src/Metal.cpp)
+target_compile_features(test_substance PRIVATE cxx_std_17)
+
+add_executable(test_container app/src/__test_container.cpp app/src/Substance.cpp app/src/Liquid.cpp app/src/Metal.cpp app/src/Container.cpp)
+target_compile_features(test_container PRIVATE cxx_std_17)
 
 if(WIN32)
     add_custom_command(
