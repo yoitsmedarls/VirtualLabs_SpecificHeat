@@ -5,6 +5,7 @@
 /* Special methods */
 
 Substance::Substance()
+    // I don't really know why I use initializer lists (0)
     : m_name(""),
       m_mass(0),
       m_temperature(0),
@@ -13,7 +14,6 @@ Substance::Substance()
       m_volume(0),
       m_isContained(false)
 {
-    // I don't really know why I use initializer lists (0)
     std::cout << "Substance | Default constructor called..." << std::endl;
 }
 
