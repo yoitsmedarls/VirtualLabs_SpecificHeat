@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.10.0)
-project(VirtualLabs_SpecificHeat VERSION 0.1.0 LANGUAGES C CXX)
+project(VirtualLabs_SpecificHeat VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
@@ -13,16 +13,28 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/app/include/)
+include_directories(BEFORE
+                    app/include/ 
+                    app/include/Container/ 
+                    app/include/Substance/)
 
 add_executable(main app/main.cpp)
 target_link_libraries(main PRIVATE sfml-graphics)
 target_compile_features(main PRIVATE cxx_std_17)
 
-add_executable(test_substance app/test/__test_substance.cpp app/src/Substance.cpp app/src/Liquid.cpp app/src/Metal.cpp)
+add_executable(test_substance 
+               app/test/__test_substance.cpp
+               app/src/Substance/Substance.cpp
+               app/src/Substance/Liquid.cpp
+               app/src/Substance/Metal.cpp)
 target_compile_features(test_substance PRIVATE cxx_std_17)
 
-add_executable(test_container app/test/__test_container.cpp app/src/Substance.cpp app/src/Liquid.cpp app/src/Metal.cpp app/src/Container.cpp)
+add_executable(test_container
+               app/test/__test_container.cpp
+               app/src/Substance/Substance.cpp
+               app/src/Substance/Liquid.cpp
+               app/src/Substance/Metal.cpp
+               app/src/Container/Container.cpp)
 target_compile_features(test_container PRIVATE cxx_std_17)
 
 if(WIN32)
