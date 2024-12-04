@@ -18,7 +18,7 @@ include_directories(BEFORE
                     "app/include/Container/"
                     "app/include/Substance/")
 
-add_executable(main "app/main.cpp")
+add_executable(main "app/src/main.cpp")
 target_link_libraries(main PRIVATE "sfml-graphics" "sfml-window" "sfml-system")
 target_compile_features(main PRIVATE cxx_std_17)
 
