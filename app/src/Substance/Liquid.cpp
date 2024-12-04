@@ -12,7 +12,8 @@ Liquid::Liquid()
     std::cout << "Liquid | Default constructor called..." << std::endl;
 }
 
-Liquid::Liquid(std::string name, double mass, double temperature, double specificHeatCapacity, double density,
+Liquid::Liquid(std::string name, double mass, double temperature,
+               double specificHeatCapacity, double density,
                double boilingPoint, double freezingPoint)
     : Substance(name, mass, temperature, specificHeatCapacity, density),
       m_boilingPoint(boilingPoint),

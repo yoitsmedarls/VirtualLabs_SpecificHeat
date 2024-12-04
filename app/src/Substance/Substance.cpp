@@ -16,7 +16,8 @@ Substance::Substance()
     std::cout << "Substance | Default constructor called..." << std::endl;
 }
 
-Substance::Substance(std::string name, double mass, double temperature, double specificHeatCapacity, double density)
+Substance::Substance(std::string name, double mass, double temperature,
+                     double specificHeatCapacity, double density)
     : m_name(name),
       m_mass(mass),
       m_temperature(temperature),

@@ -44,7 +44,8 @@ public: // Special methods
      * @param freezingPoint        Not really useful for the simulation,
      *                             but who cares :P
      */
-    Liquid(std::string name, double mass, double temperature, double specificHeatCapacity, double density,
+    Liquid(std::string name, double mass, double temperature,
+           double specificHeatCapacity, double density,
            double boilingPoint, double freezingPoint);
 
     /**
@@ -80,8 +81,12 @@ public: // Getters and Setters
     void setFreezingPoint(double freezingPoint);
 
 public: // Other methods
-    /// @brief A method-override of the one from the parent class. Just adds extra lines to the log
-    /// for the new fields in the Liquid class.
+    /**
+     * @brief   For debugging. Prints out the properties of the class in the
+     *          console for review.
+     * @details A method-override of the one from the parent class. Just adds
+     *          extra lines to the log for the new fields in the Liquid class.
+     */
     void printProperties();
 };
 

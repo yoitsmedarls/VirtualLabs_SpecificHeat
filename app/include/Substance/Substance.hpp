@@ -88,10 +88,11 @@ public: // Getters and Setters
 
 public: // Other methods
     /**
-     * @brief A method that checks if the Substance is in a Container
+     * @brief A method that checks if the Substance object is in a
+     *        Container object.
      *
      * @return true if the Substance is contained within a Container object
-     * @return false if not
+     * @return false if not.
      */
     bool isSubstanceContained();
 
