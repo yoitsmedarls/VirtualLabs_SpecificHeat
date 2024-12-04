@@ -2,6 +2,9 @@ cmake_minimum_required(VERSION 3.10.0)
 project(VirtualLabs_SpecificHeat VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
+set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
 
 include(FetchContent)
@@ -14,28 +17,35 @@ FetchContent_Declare(SFML
 FetchContent_MakeAvailable(SFML)
 
 include_directories(BEFORE
-                    "app/include/"
-                    "app/include/Container/"
-                    "app/include/Substance/")
+                    app/include/
+                    app/include/Container/
+                    app/include/Substance/)
 
-add_executable(main "app/src/main.cpp")
-target_link_libraries(main PRIVATE "sfml-graphics" "sfml-window" "sfml-system")
-target_compile_features(main PRIVATE cxx_std_17)
+add_library(substance app/src/Substance/Substance.cpp)
+add_library(liquid app/src/Substance/Liquid.cpp)
+add_library(metal app/src/Substance/Metal.cpp)
+add_library(container app/src/Container/Container.cpp)
 
-add_executable(test_substance 
-               "app/test/__test_substance.cpp"
-               "app/src/Substance/Substance.cpp"
-               "app/src/Substance/Liquid.cpp"
-               "app/src/Substance/Metal.cpp")
-target_compile_features(test_substance PRIVATE cxx_std_17)
 
-add_executable(test_container
-               "app/test/__test_container.cpp"
-               "app/src/Substance/Substance.cpp"
-               "app/src/Substance/Liquid.cpp"
-               "app/src/Substance/Metal.cpp"
-               "app/src/Container/Container.cpp")
-target_compile_features(test_container PRIVATE cxx_std_17)
+add_executable(main app/src/main.cpp)
+target_link_libraries(main PRIVATE sfml-graphics sfml-window sfml-system)
+
+add_executable(test_substance app/test/test_substance.cpp)
+target_link_libraries(test_substance substance liquid metal)
+
+add_executable(test_container app/test/test_container.cpp)
+target_link_libraries(test_container substance liquid metal container)
+
+enable_testing()
+
+add_test(
+    NAME test_substance
+    COMMAND $<TARGET_FILE:test_substance>
+)
+add_test(
+    NAME test_container
+    COMMAND $<TARGET_FILE:test_container>
+)
 
 if(WIN32)
     add_custom_command(
