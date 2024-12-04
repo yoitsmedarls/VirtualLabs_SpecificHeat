@@ -50,8 +50,8 @@ public: // Getters and Setters
     double getHeight();
     double getVolume();
     double getTopSurfaceArea();
-    Liquid getContainedLiquid();
-    Metal getContainedMetal();
+    Liquid *getContainedLiquid();
+    Metal *getContainedMetal();
 
     void setName(std::string name);
     void setDiameter(double diameter);

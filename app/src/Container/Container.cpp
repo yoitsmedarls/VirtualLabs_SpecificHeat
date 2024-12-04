@@ -94,14 +94,14 @@ double Container::getTopSurfaceArea()
     return m_topSurfaceArea;
 }
 
-Liquid Container::getContainedLiquid()
+Liquid *Container::getContainedLiquid()
 {
-    return *m_liquid;
+    return m_liquid;
 }
 
-Metal Container::getContainedMetal()
+Metal *Container::getContainedMetal()
 {
-    return *m_metal;
+    return m_metal;
 }
 
 /* Setters */
