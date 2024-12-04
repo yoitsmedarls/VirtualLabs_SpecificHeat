@@ -5,7 +5,6 @@
 /* Special methods */
 
 Substance::Substance()
-    // I don't really know why I use initializer lists (0)
     : m_name(""),
       m_mass(0),
       m_temperature(0),
@@ -26,7 +25,6 @@ Substance::Substance(std::string name, double mass, double temperature, double s
       m_volume(mass / density),
       m_isContained(false)
 {
-    // I don't really know why I use initializer lists (1)
     std::cout << "Substance | Constructor called..." << std::endl;
 }
 
@@ -39,7 +37,6 @@ Substance::Substance(const Substance &copy)
       m_volume(copy.m_volume),
       m_isContained(copy.m_isContained)
 {
-    // I don't really know why I use initializer lists (2)
     std::cout << "Substance | Copy constructor called..." << std::endl;
 }
 
