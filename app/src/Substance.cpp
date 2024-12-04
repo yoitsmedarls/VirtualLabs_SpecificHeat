@@ -13,7 +13,6 @@ Substance::Substance()
       m_volume(0),
       m_isContained(false)
 {
-    // I don't really know why I use initializer lists (0)
     std::cout << "Substance | Default constructor called..." << std::endl;
 }
 
@@ -26,7 +25,6 @@ Substance::Substance(std::string name, double mass, double temperature, double s
       m_volume(mass / density),
       m_isContained(false)
 {
-    // I don't really know why I use initializer lists (1)
     std::cout << "Substance | Constructor called..." << std::endl;
 }
 
@@ -39,7 +37,6 @@ Substance::Substance(const Substance &copy)
       m_volume(copy.m_volume),
       m_isContained(copy.m_isContained)
 {
-    // I don't really know why I use initializer lists (2)
     std::cout << "Substance | Copy constructor called..." << std::endl;
 }
 
