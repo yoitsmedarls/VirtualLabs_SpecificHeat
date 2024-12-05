@@ -7,8 +7,8 @@
 
 /**
  * @author @yoitsmedarls
- * @brief The base class for all objects designed to 'contain' other objects
- * from the Liquid and Metal class.
+ * @brief  The base class for all objects designed to 'contain' other objects
+ *         from the Liquid and Metal class.
  */
 class Container
 {
@@ -20,28 +20,69 @@ protected: // Class fields
     double m_topSurfaceArea;
     Liquid *m_liquid;
     Metal *m_metal;
-    bool m_hasLiquid;
-    bool m_hasMetal;
 
 public: // Special methods
-    /// @brief Default constructor, initializes every field with 0 or its equivalent
+    /**
+     * @brief   Construct a new Container object.
+     * @details Default constructor, initializes every field with 0 or its
+     *          equivalent
+     */
     Container();
 
-    /// @brief Constructor with arguments for the class fields.
-    Container(std::string name, double diameter, double height, Liquid &containedLiquid, Metal &containedMetal);
+    /**
+     * @brief   Construct a new Container object with supplied parameters
+     * @details Constructor with arguments for the class fields. This
+     *          constructor DOES NOT include parameters for the pointers to
+     *          the Liquid and Metal objects inside the Container.
+     *
+     * @param name
+     * @param diameter
+     * @param height
+     * @param containedLiquid
+     * @param containedMetal
+     */
+    Container(const std::string name, const double diameter,
+              const double height);
 
-    /// @brief Copy constructor. Handles cases where you pass a Container object to the Container constructor.
-    /// @param copy
+    /**
+     * @brief   Construct a new Container object with supplied parameters
+     * @details Constructor with arguments for the class fields. This
+     *          constructor includes parameters for the pointers to
+     *          the Liquid and Metal objects inside the Container
+     *
+     * @param name
+     * @param diameter
+     * @param height
+     * @param liquid
+     * @param metal
+     */
+    Container(const std::string name, const double diameter,
+              const double height, Liquid &liquid,
+              Metal &metal);
+
+    /**
+     * @brief   Copy constructor of the Container class.
+     * @details Constructs a Container object as a copy of another one.
+     *
+     * @param copy A pre-existing, pre-initialized Container object that is
+     *             passed by reference.
+     */
     Container(const Container &copy);
 
-    /// @brief Destructor
+    /**
+     * @brief Destroy the Container object
+     */
     ~Container();
 
 public: // Operator overloads
-    /// @brief Copy assignment operator. Handles cases where you assign a blank Container object with another
-    /// pre-existing Container object. It prevents extra copies.
-    /// @param copy
-    /// @return
+    /**
+     * @brief   Copy assignment operator of the Container class.
+     * @details Handles cases where you assign a blank Container object with
+     *          another pre-existing Container object. It prevents extra copies.
+     *
+     * @param copy
+     * @return Container&
+     */
     Container &operator=(const Container &copy);
 
 public: // Getters and Setters
@@ -60,9 +101,39 @@ public: // Getters and Setters
     void placeObjectInContainer(Metal &metal);
 
 public: // Other methods
+    /**
+     * @brief   Calculates volume and topSurfaceArea from the Container's
+     *          diameter and height values.
+     * @details Updates the volume and topSurfaceArea upon changes to the
+     *          other aforementioned fields. Usually called inside other
+     *          methods that change the value of fields (i.e. setters).
+     */
     void updateVolumeAndTopSurfaceArea();
-    bool containsLiquid();
-    bool containsMetal();
+
+    /**
+     * @brief   A method that checks if the Container object contains a
+     *          Liquid object.
+     * @details Checks the pointer to a Liquid object if it points to one.
+     *
+     * @return true if the pointer points to an existing Liquid object
+     * @return false if its a nullptr
+     */
+    bool hasLiquid();
+
+    /**
+     * @brief   A method that checks if the Container object contains a
+     *          Metal object.
+     * @details Checks the pointer to a Metal object if it points to one.
+     *
+     * @return true if the pointer points to an existing Metal object
+     * @return false if its a nullptr
+     */
+    bool hasMetal();
+
+    /**
+     * @brief  For debugging. Prints out the properties of the class in the
+     *         console for review.
+     */
     void printProperties();
 };
 

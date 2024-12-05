@@ -13,8 +13,9 @@ Metal::Metal()
     std::cout << "Metal | Default constructor called..." << std::endl;
 }
 
-Metal::Metal(std::string name, double mass, double temperature,
-             double specificHeatCapacity, double density)
+Metal::Metal(const std::string name, const double mass,
+             const double temperature, const double specificHeatCapacity,
+             const double density)
     : Substance(name, mass, temperature, specificHeatCapacity, density),
       m_sideLength(std::cbrt(mass / density)),
       m_isSubmerged(false)

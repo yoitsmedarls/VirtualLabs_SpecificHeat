@@ -44,8 +44,8 @@ public: // Special methods
      * @param density              The mass and density values supplied in this
      *                             constructor is used to calculate volume.
      */
-    Substance(std::string name, double mass, double temperature,
-              double specificHeatCapacity, double density);
+    Substance(const std::string name, const double mass, const double temperature,
+              const double specificHeatCapacity, const double density);
 
     /**
      * @brief   Copy constructor of the Substance class.
@@ -80,11 +80,11 @@ public: // Getters and Setters
     double getDensity();
     double getVolume();
 
-    void setName(std::string name);
-    void setMass(double mass);
-    void setTemperature(double temperature);
-    void setSpecificHeatCapacity(double specificHeatCapacity);
-    void setDensity(double density);
+    void setName(const std::string name);
+    void setMass(const double mass);
+    void setTemperature(const double temperature);
+    void setSpecificHeatCapacity(const double specificHeatCapacity);
+    void setDensity(const double density);
 
 public: // Other methods
     /**

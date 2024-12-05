@@ -44,9 +44,9 @@ public: // Special methods
      * @param freezingPoint        Not really useful for the simulation,
      *                             but who cares :P
      */
-    Liquid(std::string name, double mass, double temperature,
-           double specificHeatCapacity, double density,
-           double boilingPoint, double freezingPoint);
+    Liquid(const std::string name, const double mass, const double temperature,
+           const double specificHeatCapacity, const double density,
+           const double boilingPoint, const double freezingPoint);
 
     /**
      * @brief   Copy constructor of the Liquid class.
@@ -77,8 +77,8 @@ public: // Getters and Setters
     double getBoilingPoint();
     double getFreezingPoint();
 
-    void setBoilingPoint(double boilingPoint);
-    void setFreezingPoint(double freezingPoint);
+    void setBoilingPoint(const double boilingPoint);
+    void setFreezingPoint(const double freezingPoint);
 
 public: // Other methods
     /**

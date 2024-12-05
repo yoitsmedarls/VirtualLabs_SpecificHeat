@@ -12,9 +12,10 @@ Liquid::Liquid()
     std::cout << "Liquid | Default constructor called..." << std::endl;
 }
 
-Liquid::Liquid(std::string name, double mass, double temperature,
-               double specificHeatCapacity, double density,
-               double boilingPoint, double freezingPoint)
+Liquid::Liquid(const std::string name, const double mass,
+               const double temperature, const double specificHeatCapacity,
+               const double density, const double boilingPoint,
+               const double freezingPoint)
     : Substance(name, mass, temperature, specificHeatCapacity, density),
       m_boilingPoint(boilingPoint),
       m_freezingPoint(freezingPoint)
@@ -62,11 +63,11 @@ double Liquid::getFreezingPoint()
 
 /* Setters */
 
-void Liquid::setBoilingPoint(double boilingPoint)
+void Liquid::setBoilingPoint(const double boilingPoint)
 {
     m_boilingPoint = boilingPoint;
 }
-void Liquid::setFreezingPoint(double freezingPoint)
+void Liquid::setFreezingPoint(const double freezingPoint)
 {
     m_freezingPoint = freezingPoint;
 }

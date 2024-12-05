@@ -16,8 +16,8 @@ Substance::Substance()
     std::cout << "Substance | Default constructor called..." << std::endl;
 }
 
-Substance::Substance(std::string name, double mass, double temperature,
-                     double specificHeatCapacity, double density)
+Substance::Substance(const std::string name, const double mass, const double temperature,
+                     const double specificHeatCapacity, const double density)
     : m_name(name),
       m_mass(mass),
       m_temperature(temperature),
@@ -94,28 +94,28 @@ double Substance::getVolume()
 
 /* Setters */
 
-void Substance::setName(std::string name)
+void Substance::setName(const std::string name)
 {
     m_name = name;
 }
 
-void Substance::setMass(double mass)
+void Substance::setMass(const double mass)
 {
     m_mass = mass;
     updateVolume();
 }
 
-void Substance::setTemperature(double temperature)
+void Substance::setTemperature(const double temperature)
 {
     m_temperature = temperature;
 }
 
-void Substance::setSpecificHeatCapacity(double specificHeatCapacity)
+void Substance::setSpecificHeatCapacity(const double specificHeatCapacity)
 {
     m_specificHeatCapacity = specificHeatCapacity;
 }
 
-void Substance::setDensity(double density)
+void Substance::setDensity(const double density)
 {
     m_density = density;
     updateVolume();

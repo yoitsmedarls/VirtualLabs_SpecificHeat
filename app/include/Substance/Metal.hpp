@@ -39,8 +39,8 @@ public: // Special methods
      * @param density              The mass and density values supplied in this
      *                             constructor is used to calculate volume.
      */
-    Metal(std::string name, double mass, double temperature,
-          double specificHeatCapacity, double density);
+    Metal(const std::string name, const double mass, const double temperature,
+          const double specificHeatCapacity, const double density);
 
     /**
      * @brief   Copy constructor of the Metal class.
@@ -70,8 +70,8 @@ public: // Operator overloads
 public: // Getters and Setters
     double getSideLength();
 
-    void setDensity(double density);
-    void setMass(double volume);
+    void setDensity(const double density);
+    void setMass(const double volume);
 
 public: // Other methods
     /**

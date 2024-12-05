@@ -11,27 +11,37 @@ Container::Container()
       m_height(0),
       m_volume(0),
       m_topSurfaceArea(0),
-      m_liquid(),
-      m_metal(),
-      m_hasLiquid(false),
-      m_hasMetal(false)
+      m_liquid(nullptr),
+      m_metal(nullptr)
 {
     std::cout << "Container | Default constructor called..." << std::endl;
 }
 
-Container::Container(std::string name, double diameter, double height, Liquid &liquid, Metal &metal)
+Container::Container(const std::string name, const double diameter,
+                     const double height)
+    : m_name(name),
+      m_diameter(diameter),
+      m_height(height),
+      m_volume((M_PI * pow((diameter / 2), 2)) * height),
+      m_topSurfaceArea(M_PI * pow((diameter / 2), 2)),
+      m_liquid(nullptr),
+      m_metal(nullptr)
+{
+    std::cout << "Container | Constructor without pointers called..." << std::endl;
+}
+
+Container::Container(const std::string name, const double diameter,
+                     const double height, Liquid &liquid,
+                     Metal &metal)
     : m_name(name),
       m_diameter(diameter),
       m_height(height),
       m_volume((M_PI * pow((diameter / 2), 2)) * height),
       m_topSurfaceArea(M_PI * pow((diameter / 2), 2)),
       m_liquid(&liquid),
-      m_metal(&metal),
-      m_hasLiquid(true),
-      m_hasMetal(true)
-
+      m_metal(&metal)
 {
-    std::cout << "Container | Constructor called..." << std::endl;
+    std::cout << "Container | Constructor with pointers called..." << std::endl;
 }
 
 Container::Container(const Container &copy)
@@ -41,9 +51,7 @@ Container::Container(const Container &copy)
       m_volume(copy.m_volume),
       m_topSurfaceArea(copy.m_topSurfaceArea),
       m_liquid(copy.m_liquid),
-      m_metal(copy.m_metal),
-      m_hasLiquid(copy.m_hasLiquid),
-      m_hasMetal(copy.m_hasMetal)
+      m_metal(copy.m_metal)
 {
     std::cout << "Container | Copy constructor called..." << std::endl;
 }
@@ -126,12 +134,10 @@ void Container::setHeight(double height)
 void Container::placeObjectInContainer(Liquid &liquid)
 {
     m_liquid = &liquid;
-    m_hasLiquid = true;
 }
 void Container::placeObjectInContainer(Metal &metal)
 {
     m_metal = &metal;
-    m_hasMetal = true;
 }
 
 /* Other methods */
@@ -142,14 +148,24 @@ void Container::updateVolumeAndTopSurfaceArea()
     m_volume = m_topSurfaceArea * m_height;
 }
 
-bool Container::containsLiquid()
+bool Container::hasLiquid()
 {
-    return m_hasLiquid;
+    if (m_liquid == nullptr)
+    {
+        return false;
+    }
+
+    return true;
 }
 
-bool Container::containsMetal()
+bool Container::hasMetal()
 {
-    return m_hasMetal;
+    if (m_metal == nullptr)
+    {
+        return false;
+    }
+
+    return true;
 }
 
 void Container::printProperties()
@@ -161,7 +177,5 @@ void Container::printProperties()
               << " Volume: " << m_volume << "\n"
               << " TopSurfaceArea: " << m_topSurfaceArea << "\n"
               << " Liquid: " << m_liquid << "\n"
-              << " Metal: " << m_metal << "\n"
-              << " HasLiquid: " << m_hasLiquid << "\n"
-              << " HasMetal: " << m_hasMetal << "\n";
+              << " Metal: " << m_metal << "\n";
 }
