@@ -15,13 +15,21 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-include_directories(app/include/)
+include_directories(include/)
 
-add_executable(main app/src/__main.cpp)
+add_executable(main src/__main.cpp)
 target_link_libraries(main PRIVATE sfml-graphics sfml-window sfml-system)
 
-add_executable(test_substance app/test/test_substance.cpp app/src/Substance.cpp app/src/Liquid.cpp app/src/Metal.cpp)
-add_executable(test_container app/test/test_container.cpp app/src/Substance.cpp app/src/Liquid.cpp app/src/Metal.cpp app/src/Container.cpp)
+add_executable(test_substance test/__test_substance.cpp 
+               src/Substance.cpp
+               src/Liquid.cpp
+               src/Metal.cpp)
+
+add_executable(test_container test/__test_container.cpp
+               src/Substance.cpp
+               src/Liquid.cpp
+               src/Metal.cpp
+               src/Container.cpp)
 
 enable_testing()
 
