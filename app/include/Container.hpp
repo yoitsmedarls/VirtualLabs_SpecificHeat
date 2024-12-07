@@ -16,7 +16,8 @@ protected: // Class fields
     std::string m_name;
     double m_diameter;
     double m_height;
-    double m_volume;
+    double m_totalVolume;
+    double m_availableVolume;
     double m_topSurfaceArea;
     Liquid *m_liquid;
     Metal *m_metal;
@@ -41,8 +42,9 @@ public: // Special methods
      * @param containedLiquid
      * @param containedMetal
      */
-    Container(const std::string name, const double diameter,
-              const double height);
+    Container(std::string name,
+              double diameter,
+              double height);
 
     /**
      * @brief   Construct a new Container object with supplied parameters
@@ -56,8 +58,10 @@ public: // Special methods
      * @param liquid
      * @param metal
      */
-    Container(const std::string name, const double diameter,
-              const double height, Liquid &liquid,
+    Container(std::string name,
+              double diameter,
+              double height,
+              Liquid &liquid,
               Metal &metal);
 
     /**
@@ -102,33 +106,22 @@ public: // Getters and Setters
 
 public: // Other methods
     /**
-     * @brief   Calculates volume and topSurfaceArea from the Container's
+     * @brief   Calculates topSurfaceArea from the Container's
      *          diameter and height values.
-     * @details Updates the volume and topSurfaceArea upon changes to the
-     *          other aforementioned fields. Usually called inside other
+     * @details Updates the topSurfaceArea upon changes to the other
+     *          aforementioned fields. Usually called inside other
      *          methods that change the value of fields (i.e. setters).
      */
-    void updateVolumeAndTopSurfaceArea();
+    void updateTopSurfaceArea();
 
     /**
-     * @brief   A method that checks if the Container object contains a
-     *          Liquid object.
-     * @details Checks the pointer to a Liquid object if it points to one.
-     *
-     * @return true if the pointer points to an existing Liquid object
-     * @return false if its a nullptr
+     * @brief   Calculates volume from the Container's
+     *          diameter and height values.
+     * @details Updates the volume changes to the other aforementioned
+     *          fields. Usually called inside other methods that change
+     *          the value of fields (i.e. setters).
      */
-    bool hasLiquid();
-
-    /**
-     * @brief   A method that checks if the Container object contains a
-     *          Metal object.
-     * @details Checks the pointer to a Metal object if it points to one.
-     *
-     * @return true if the pointer points to an existing Metal object
-     * @return false if its a nullptr
-     */
-    bool hasMetal();
+    void updateVolume();
 
     /**
      * @brief  For debugging. Prints out the properties of the class in the

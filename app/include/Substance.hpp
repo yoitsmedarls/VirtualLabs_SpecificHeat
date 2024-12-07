@@ -13,11 +13,10 @@ class Substance
 protected: // Class fields
     std::string m_name;
     double m_mass;
-    double m_temperature;
-    double m_specificHeatCapacity;
     double m_density;
     double m_volume;
-    bool m_isContained;
+    double m_temperature;
+    double m_specificHeatCapacity;
 
 public: // Special methods
     /**
@@ -36,16 +35,19 @@ public: // Special methods
      * @param name                 Give the substance a name for identification
      *                             purposes. Used in debugging.
      * @param mass                 Substances must have a mass.
+     * @param density              The mass and density values supplied in this
+     *                             constructor is used to calculate volume.
      * @param temperature          Key parameter given that the simulated
      *                             experiment is a specific heat experiment.
      * @param specificHeatCapacity Refer to https://en.wikipedia.org/wiki/Table_of_specific_heat_capacities
      *                             for the specific heat capacity of your chosen
      *                             substance.
-     * @param density              The mass and density values supplied in this
-     *                             constructor is used to calculate volume.
      */
-    Substance(const std::string name, const double mass, const double temperature,
-              const double specificHeatCapacity, const double density);
+    Substance(std::string name,
+              double mass,
+              double density,
+              double temperature,
+              double specificHeatCapacity);
 
     /**
      * @brief   Copy constructor of the Substance class.
@@ -75,27 +77,18 @@ public: // Operator overloads
 public: // Getters and Setters
     std::string getName();
     double getMass();
-    double getTemperature();
-    double getSpecificHeatCapacity();
     double getDensity();
     double getVolume();
+    double getTemperature();
+    double getSpecificHeatCapacity();
 
-    void setName(const std::string name);
-    void setMass(const double mass);
-    void setTemperature(const double temperature);
-    void setSpecificHeatCapacity(const double specificHeatCapacity);
-    void setDensity(const double density);
+    void setName(std::string name);
+    void setMass(double mass);
+    void setDensity(double density);
+    void setTemperature(double temperature);
+    void setSpecificHeatCapacity(double specificHeatCapacity);
 
 public: // Other methods
-    /**
-     * @brief A method that checks if the Substance object is in a
-     *        Container object.
-     *
-     * @return true if the Substance is contained within a Container object
-     * @return false if not.
-     */
-    bool isSubstanceContained();
-
     /**
      * @brief   Calculates volume from the Substance's mass and density values.
      * @details Updates the volume of the Substance upon changes to the other

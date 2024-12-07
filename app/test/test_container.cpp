@@ -6,16 +6,10 @@
 
 int main()
 {
-    Substance mySubstance = Substance("My Substance", 100, 24, 4231, 1);
-    Liquid water = Liquid("Water", 100, 25, 4186, 1, 100, 0);
-    Metal aluminum = Metal("Aluminum", 50, 20, 903, 2.7);
-    Container myContainer = Container("MyContainer", 5, 7, water, aluminum);
+    Liquid water = Liquid("Water", 100, 1, 25, 4.186, 100, 0);
+    Metal aluminum = Metal("Aluminum", 50, 2.7, 20, 0.903);
+    Container myContainer = Container("MyContainer", 5, 7);
 
-    std::cout << std::endl;
-
-    mySubstance.printProperties();
-    std::cout << " Address: " << &mySubstance << "\n"
-              << " Size (bytes): " << sizeof(mySubstance) << "\n";
     std::cout << std::endl;
 
     water.printProperties();
@@ -28,21 +22,23 @@ int main()
               << " Size (bytes): " << sizeof(aluminum) << "\n";
     std::cout << std::endl;
 
-    water.setMass(1000);
-    water.setDensity(2);
-
-    aluminum.setMass(4000);
-    aluminum.setTemperature(723);
-
     myContainer.printProperties();
     std::cout << " Address: " << &myContainer << "\n"
               << " Size (bytes): " << sizeof(myContainer) << "\n";
     std::cout << std::endl;
 
+    myContainer.placeObjectInContainer(water);
+    myContainer.placeObjectInContainer(aluminum);
+
     myContainer.getContainedLiquid()->printProperties();
     std::cout << std::endl;
 
     myContainer.getContainedMetal()->printProperties();
+    std::cout << std::endl;
+
+    myContainer.printProperties();
+    std::cout << " Address: " << &myContainer << "\n"
+              << " Size (bytes): " << sizeof(myContainer) << "\n";
     std::cout << std::endl;
 
     return EXIT_SUCCESS;

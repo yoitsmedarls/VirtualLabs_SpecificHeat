@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.10.0)
 project(VirtualLabs_SpecificHeat VERSION 0.1.0 LANGUAGES CXX)
 
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/lib)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 option(BUILD_SHARED_LIBS "Build shared libraries" OFF)
@@ -16,25 +15,13 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-include_directories(BEFORE
-                    app/include/
-                    app/include/Container/
-                    app/include/Substance/)
+include_directories(app/include/)
 
-add_library(substance app/src/Substance/Substance.cpp)
-add_library(liquid app/src/Substance/Liquid.cpp)
-add_library(metal app/src/Substance/Metal.cpp)
-add_library(container app/src/Container/Container.cpp)
-
-
-add_executable(main app/src/main.cpp)
+add_executable(main app/src/__main.cpp)
 target_link_libraries(main PRIVATE sfml-graphics sfml-window sfml-system)
 
-add_executable(test_substance app/test/test_substance.cpp)
-target_link_libraries(test_substance substance liquid metal)
-
-add_executable(test_container app/test/test_container.cpp)
-target_link_libraries(test_container substance liquid metal container)
+add_executable(test_substance app/test/test_substance.cpp app/src/Substance.cpp app/src/Liquid.cpp app/src/Metal.cpp)
+add_executable(test_container app/test/test_container.cpp app/src/Substance.cpp app/src/Liquid.cpp app/src/Metal.cpp app/src/Container.cpp)
 
 enable_testing()
 

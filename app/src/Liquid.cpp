@@ -9,18 +9,27 @@ Liquid::Liquid()
       m_boilingPoint(0),
       m_freezingPoint(0)
 {
-    std::cout << "Liquid | Default constructor called..." << std::endl;
+    std::cout << "Liquid | Default constructed..."
+              << std::endl;
 }
 
-Liquid::Liquid(const std::string name, const double mass,
-               const double temperature, const double specificHeatCapacity,
-               const double density, const double boilingPoint,
-               const double freezingPoint)
-    : Substance(name, mass, temperature, specificHeatCapacity, density),
+Liquid::Liquid(std::string name,
+               double mass,
+               double density,
+               double temperature,
+               double specificHeatCapacity,
+               double boilingPoint,
+               double freezingPoint)
+    : Substance(name,
+                mass,
+                density,
+                temperature,
+                specificHeatCapacity),
       m_boilingPoint(boilingPoint),
       m_freezingPoint(freezingPoint)
 {
-    std::cout << "Liquid | Constructor called..." << std::endl;
+    std::cout << "Liquid | " << m_name << " constructed..."
+              << std::endl;
 }
 
 Liquid::Liquid(const Liquid &copy)
@@ -28,18 +37,21 @@ Liquid::Liquid(const Liquid &copy)
       m_boilingPoint(copy.m_boilingPoint),
       m_freezingPoint(copy.m_freezingPoint)
 {
-    std::cout << "Liquid | Copy constructor called..." << std::endl;
+    std::cout << "Liquid | " << m_name << " (copy) constructed..."
+              << std::endl;
 }
 Liquid::~Liquid()
 {
-    std::cout << "Liquid | Destructor called..." << std::endl;
+    std::cout << "Liquid | " << m_name << " destroyed..."
+              << std::endl;
 }
 
 /* Operator overloads */
 
 Liquid &Liquid::operator=(const Liquid &copy)
 {
-    std::cout << "Liquid | Copy assignment operator used..." << std::endl;
+    std::cout << "Liquid | Copy assignment operator used..."
+              << std::endl;
 
     if (&copy == this)
     {
@@ -63,11 +75,11 @@ double Liquid::getFreezingPoint()
 
 /* Setters */
 
-void Liquid::setBoilingPoint(const double boilingPoint)
+void Liquid::setBoilingPoint(double boilingPoint)
 {
     m_boilingPoint = boilingPoint;
 }
-void Liquid::setFreezingPoint(const double freezingPoint)
+void Liquid::setFreezingPoint(double freezingPoint)
 {
     m_freezingPoint = freezingPoint;
 }

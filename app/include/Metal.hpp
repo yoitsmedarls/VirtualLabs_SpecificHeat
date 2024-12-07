@@ -12,7 +12,6 @@ class Metal : public Substance
 {
 private: // Class fields
     double m_sideLength;
-    bool m_isSubmerged;
 
 public: // Special methods
     /**
@@ -31,16 +30,19 @@ public: // Special methods
      * @param name                 Give the substance a name for identification
      *                             purposes. Used in debugging.
      * @param mass                 Substances must have a mass.
+     * @param density              The mass and density values supplied in this
+     *                             constructor is used to calculate volume.
      * @param temperature          Key parameter given that the simulated
      *                             experiment is a specific heat experiment.
      * @param specificHeatCapacity Refer to https://en.wikipedia.org/wiki/Table_of_specific_heat_capacities
      *                             for the specific heat capacity of your chosen
      *                             substance.
-     * @param density              The mass and density values supplied in this
-     *                             constructor is used to calculate volume.
      */
-    Metal(const std::string name, const double mass, const double temperature,
-          const double specificHeatCapacity, const double density);
+    Metal(std::string name,
+          double mass,
+          double density,
+          double temperature,
+          double specificHeatCapacity);
 
     /**
      * @brief   Copy constructor of the Metal class.
@@ -70,22 +72,10 @@ public: // Operator overloads
 public: // Getters and Setters
     double getSideLength();
 
-    void setDensity(const double density);
-    void setMass(const double volume);
+    void setMass(double volume);
+    void setDensity(double density);
 
 public: // Other methods
-    /**
-     * @brief   A method that checks if the Metal is 'submerged' in a Liquid
-     *          in a Container.
-     * @details A metal is considered 'submerged' if it's in a Container object
-     *          that has a Liquid object already.
-     *
-     * @return true if contained in a Container object together with a
-     *         Liquid object.
-     * @return false if not.
-     */
-    bool isMetalSubmerged();
-
     /**
      * @brief   Calculates sideLength from the Metal's volume.
      * @details Updates the sideLength field when changes to the mass or

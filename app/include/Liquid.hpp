@@ -31,22 +31,26 @@ public: // Special methods
      * @param name                 Give the substance a name for identification
      *                             purposes. Used in debugging.
      * @param mass                 Substances must have a mass.
+     * @param density              The mass and density values supplied in this
+     *                             constructor is used to calculate volume.
      * @param temperature          Key parameter given that the simulated
      *                             experiment is a specific heat experiment.
      * @param specificHeatCapacity Refer to https://en.wikipedia.org/wiki/Table_of_specific_heat_capacities
      *                             for the specific heat capacity of your chosen
      *                             substance.
-     * @param density              The mass and density values supplied in this
-     *                             constructor is used to calculate volume.
      * @param boilingPoint         Unique to the Liquid class. Used for the
      *                             simulation of heating the liquid in a
      *                             Container using a HeatPlate.
      * @param freezingPoint        Not really useful for the simulation,
      *                             but who cares :P
      */
-    Liquid(const std::string name, const double mass, const double temperature,
-           const double specificHeatCapacity, const double density,
-           const double boilingPoint, const double freezingPoint);
+    Liquid(std::string name,
+           double mass,
+           double density,
+           double temperature,
+           double specificHeatCapacity,
+           double boilingPoint,
+           double freezingPoint);
 
     /**
      * @brief   Copy constructor of the Liquid class.
@@ -77,8 +81,8 @@ public: // Getters and Setters
     double getBoilingPoint();
     double getFreezingPoint();
 
-    void setBoilingPoint(const double boilingPoint);
-    void setFreezingPoint(const double freezingPoint);
+    void setBoilingPoint(double boilingPoint);
+    void setFreezingPoint(double freezingPoint);
 
 public: // Other methods
     /**
