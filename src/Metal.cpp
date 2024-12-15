@@ -9,8 +9,7 @@ Metal::Metal()
     : Substance(),
       m_sideLength(0)
 {
-    std::cout << "Metal | Default constructed..."
-              << std::endl;
+    std::cout << "Metal | Default constructed...\n";
 }
 
 Metal::Metal(std::string name,
@@ -25,30 +24,26 @@ Metal::Metal(std::string name,
                 specificHeatCapacity),
       m_sideLength(std::cbrt(mass / density))
 {
-    std::cout << "Metal | " << m_name << " constructed..."
-              << std::endl;
+    std::cout << "Metal | " << m_name << " constructed...\n";
 }
 
 Metal::Metal(const Metal &copy)
     : Substance(copy),
       m_sideLength(copy.m_sideLength)
 {
-    std::cout << "Metal | " << m_name << " (copy) constructed..."
-              << std::endl;
+    std::cout << "Metal | " << m_name << " (copy) constructed...\n";
 }
 
 Metal::~Metal()
 {
-    std::cout << "Metal | " << m_name << " destroyed..."
-              << std::endl;
+    std::cout << "Metal | " << m_name << " destroyed...\n";
 }
 
 /* Operator overloads */
 
 Metal &Metal::operator=(const Metal &copy)
 {
-    std::cout << "Metal | Copy assignment operator used..."
-              << std::endl;
+    std::cout << "Metal | Copy assignment operator used...\n";
 
     if (&copy == this)
     {

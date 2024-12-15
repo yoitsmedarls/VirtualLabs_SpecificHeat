@@ -12,8 +12,7 @@ Substance::Substance()
       m_temperature(0),
       m_specificHeatCapacity(0)
 {
-    std::cout << "Substance | Default constructed..."
-              << std::endl;
+    std::cout << "Substance | Default constructed...\n";
 }
 
 Substance::Substance(std::string name,
@@ -28,8 +27,7 @@ Substance::Substance(std::string name,
       m_temperature(temperature),
       m_specificHeatCapacity(specificHeatCapacity)
 {
-    std::cout << "Substance | " << m_name << " constructed... "
-              << std::endl;
+    std::cout << "Substance | " << m_name << " constructed... \n";
 }
 
 Substance::Substance(const Substance &copy)
@@ -40,24 +38,19 @@ Substance::Substance(const Substance &copy)
       m_temperature(copy.m_temperature),
       m_specificHeatCapacity(copy.m_specificHeatCapacity)
 {
-    std::cout << "Substance | " << m_name << " (copy) constructed..."
-              << std::endl;
+    std::cout << "Substance | " << m_name << " (copy) constructed...\n";
 }
 
 Substance::~Substance()
 {
-    std::cout << "Substance | "
-              << m_name
-              << " destroyed..."
-              << std::endl;
+    std::cout << "Substance | " << m_name << " destroyed...\n";
 }
 
 /* Operator overloads */
 
 Substance &Substance::operator=(const Substance &copy)
 {
-    std::cout << "Substance | Copy assignment operator used..."
-              << std::endl;
+    std::cout << "Substance | Copy assignment operator used...\n";
 
     if (&copy == this)
     {

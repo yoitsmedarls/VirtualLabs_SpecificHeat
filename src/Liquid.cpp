@@ -9,8 +9,7 @@ Liquid::Liquid()
       m_boilingPoint(0),
       m_freezingPoint(0)
 {
-    std::cout << "Liquid | Default constructed..."
-              << std::endl;
+    std::cout << "Liquid | Default constructed...\n";
 }
 
 Liquid::Liquid(std::string name,
@@ -28,8 +27,7 @@ Liquid::Liquid(std::string name,
       m_boilingPoint(boilingPoint),
       m_freezingPoint(freezingPoint)
 {
-    std::cout << "Liquid | " << m_name << " constructed..."
-              << std::endl;
+    std::cout << "Liquid | " << m_name << " constructed...\n";
 }
 
 Liquid::Liquid(const Liquid &copy)
@@ -37,21 +35,18 @@ Liquid::Liquid(const Liquid &copy)
       m_boilingPoint(copy.m_boilingPoint),
       m_freezingPoint(copy.m_freezingPoint)
 {
-    std::cout << "Liquid | " << m_name << " (copy) constructed..."
-              << std::endl;
+    std::cout << "Liquid | " << m_name << " (copy) constructed...\n";
 }
 Liquid::~Liquid()
 {
-    std::cout << "Liquid | " << m_name << " destroyed..."
-              << std::endl;
+    std::cout << "Liquid | " << m_name << " destroyed...\n";
 }
 
 /* Operator overloads */
 
 Liquid &Liquid::operator=(const Liquid &copy)
 {
-    std::cout << "Liquid | Copy assignment operator used..."
-              << std::endl;
+    std::cout << "Liquid | Copy assignment operator used...\n";
 
     if (&copy == this)
     {

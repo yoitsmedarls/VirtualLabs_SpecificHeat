@@ -3,6 +3,8 @@
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
 
+#include "Sprite2DComponent.hpp"
+
 // Dimensions for the initial window launch
 #define WINDOW_HEIGHT 768
 #define WINDOW_WIDTH 1366
@@ -42,8 +44,10 @@ int main()
               << std::endl;
 
     // Indicates program startup
-    std::cout
-        << "Launching window..." << std::endl;
+    std::cout << "Launching window..." << std::endl;
+
+    Sprite2DComponent mySprite = Sprite2DComponent(
+        "My Sprite", "../assets/img/my_sprite.png");
 
     // Starts the program loop
     while (window.isOpen())
@@ -112,6 +116,9 @@ int main()
         }
 
         window.clear();
+
+        mySprite.renderToWindow(window);
+
         window.display();
     }
 

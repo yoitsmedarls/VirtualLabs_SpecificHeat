@@ -39,8 +39,6 @@ public: // Special methods
      * @param name
      * @param diameter
      * @param height
-     * @param containedLiquid
-     * @param containedMetal
      */
     Container(std::string name,
               double diameter,
@@ -101,8 +99,8 @@ public: // Getters and Setters
     void setName(std::string name);
     void setDiameter(double diameter);
     void setHeight(double height);
-    void placeObjectInContainer(Liquid &liquid);
-    void placeObjectInContainer(Metal &metal);
+    void addLiquid(Liquid &liquid);
+    void addMetal(Metal &metal);
 
 public: // Other methods
     /**

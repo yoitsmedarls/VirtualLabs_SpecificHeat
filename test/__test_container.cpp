@@ -27,8 +27,8 @@ int main()
               << " Size (bytes): " << sizeof(myContainer) << "\n";
     std::cout << std::endl;
 
-    myContainer.placeObjectInContainer(water);
-    myContainer.placeObjectInContainer(aluminum);
+    myContainer.addLiquid(water);
+    myContainer.addMetal(aluminum);
 
     myContainer.getContainedLiquid()->printProperties();
     std::cout << std::endl;

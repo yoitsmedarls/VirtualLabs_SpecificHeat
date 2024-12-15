@@ -31,6 +31,11 @@ add_executable(test_container test/__test_container.cpp
                src/Metal.cpp
                src/Container.cpp)
 
+add_executable(test_sprites test/__test_sprites.cpp
+               src/IComponent.cpp
+               src/Sprite2DComponent.cpp)
+target_link_libraries(test_sprites PRIVATE sfml-graphics sfml-window sfml-system)
+
 enable_testing()
 
 add_test(
@@ -41,6 +46,11 @@ add_test(
     NAME test_container
     COMMAND $<TARGET_FILE:test_container>
 )
+add_test(
+    NAME test_sprites
+    COMMAND $<TARGET_FILE:test_sprites>
+)
+
 
 if(WIN32)
     add_custom_command(

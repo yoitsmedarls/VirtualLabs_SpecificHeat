@@ -15,8 +15,7 @@ Container::Container()
       m_liquid(nullptr),
       m_metal(nullptr)
 {
-    std::cout << "Container | Default constructed..."
-              << std::endl;
+    std::cout << "Container | Default constructed...\n";
 }
 
 Container::Container(const std::string name,
@@ -31,9 +30,7 @@ Container::Container(const std::string name,
       m_liquid(nullptr),
       m_metal(nullptr)
 {
-    std::cout << "Container | " << m_name
-              << " without substances constructed..."
-              << std::endl;
+    std::cout << "Container | " << m_name << " constructed with no substances...\n";
 }
 
 Container::Container(const std::string name,
@@ -48,12 +45,10 @@ Container::Container(const std::string name,
       m_availableVolume(m_totalVolume),
       m_topSurfaceArea(M_PI * pow((diameter / 2), 2))
 {
-    std::cout << "Container | " << m_name
-              << " with substances constructed..."
-              << std::endl;
+    std::cout << "Container | " << m_name << " constructed with substances ...\n";
 
-    placeObjectInContainer(liquid);
-    placeObjectInContainer(metal);
+    addLiquid(liquid);
+    addMetal(metal);
 }
 
 Container::Container(const Container &copy)
@@ -66,22 +61,19 @@ Container::Container(const Container &copy)
       m_liquid(copy.m_liquid),
       m_metal(copy.m_metal)
 {
-    std::cout << "Container | " << m_name << " (copy) constructed..."
-              << std::endl;
+    std::cout << "Container | " << m_name << " (copy) constructed...\n";
 }
 
 Container::~Container()
 {
-    std::cout << "Container | " << m_name << " destroyed..."
-              << std::endl;
+    std::cout << "Container | " << m_name << " destroyed...\n";
 }
 
 /* Operator overloads */
 
 Container &Container::operator=(const Container &copy)
 {
-    std::cout << "Container | Copy assignment operator used..."
-              << std::endl;
+    std::cout << "Container | Copy assignment operator used...\n";
 
     if (&copy == this)
     {
@@ -175,7 +167,7 @@ void Container::setHeight(double height)
     updateVolume();
 }
 
-void Container::placeObjectInContainer(Liquid &liquid)
+void Container::addLiquid(Liquid &liquid)
 {
     try
     {
@@ -194,7 +186,7 @@ void Container::placeObjectInContainer(Liquid &liquid)
     m_liquid = &liquid;
     m_availableVolume -= liquid.getVolume();
 }
-void Container::placeObjectInContainer(Metal &metal)
+void Container::addMetal(Metal &metal)
 {
     try
     {
