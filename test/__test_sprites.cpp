@@ -46,8 +46,7 @@ int main()
     // Indicates program startup
     std::cout << "Launching window..." << std::endl;
 
-    Sprite2DComponent mySprite = Sprite2DComponent(
-        "My Sprite", "../assets/images/background.png");
+    vl::Sprite2DComponent mySprite = vl::Sprite2DComponent("My Sprite", "../assets/images/background.png");
 
     // Starts the program loop
     while (window.isOpen())
@@ -110,6 +109,11 @@ int main()
                 }
                 break;
 
+            // Handles mouse hovers
+            case sf::Event::MouseEntered:
+                std::cout << "MouseEntered: " << std::endl;
+                break;
+
             default:
                 break;
             }
@@ -117,7 +121,7 @@ int main()
 
         window.clear();
 
-        mySprite.renderToWindow(window);
+        mySprite.renderComponent(window);
 
         window.display();
     }

@@ -15,26 +15,42 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-include_directories(include/)
+include_directories("include/VirtualLabs"
+                    "include/VirtualLabs/Components"
+                    "include/VirtualLabs/Components/Physics"
+                    "include/VirtualLabs/Components/Physics/Container"
+                    "include/VirtualLabs/Components/Physics/Substance")
 
 add_executable(main src/__main.cpp)
 target_link_libraries(main PRIVATE sfml-graphics sfml-window sfml-system)
 
-add_executable(test_substance test/__test_substance.cpp 
-               src/Substance.cpp
-               src/Liquid.cpp
-               src/Metal.cpp)
+add_executable(test_substance
+               "test/__test_substance.cpp" 
+               "src/VirtualLabs/Components/Physics/Substance/Substance.cpp"
+               "src/VirtualLabs/Components/Physics/Substance/Liquid.cpp"
+               "src/VirtualLabs/Components/Physics/Substance/Metal.cpp")
 
-add_executable(test_container test/__test_container.cpp
-               src/Substance.cpp
-               src/Liquid.cpp
-               src/Metal.cpp
-               src/Container.cpp)
+add_executable(test_container
+               "test/__test_container.cpp"
+               "src/VirtualLabs/Components/Physics/Substance/Substance.cpp"
+               "src/VirtualLabs/Components/Physics/Substance/Liquid.cpp"
+               "src/VirtualLabs/Components/Physics/Substance/Metal.cpp"
+               "src/VirtualLabs/Components/Physics/Container/Container.cpp")
 
-add_executable(test_sprites test/__test_sprites.cpp
-               src/IComponent.cpp
-               src/Sprite2DComponent.cpp)
+add_executable(test_sprites
+               "test/__test_sprites.cpp"
+               "src/VirtualLabs/Components/IComponent.cpp"
+               "src/VirtualLabs/Components/Sprite2DComponent.cpp")
 target_link_libraries(test_sprites PRIVATE sfml-graphics sfml-window sfml-system)
+
+add_executable(test_entity
+               "test/__test_sprites.cpp"
+               "src/VirtualLabs/Components/IComponent.cpp"
+               "src/VirtualLabs/Components/Sprite2DComponent.cpp"
+               "src/VirtualLabs/Entity.cpp"
+               "src/VirtualLabs/EntityManager.cpp")
+target_link_libraries(test_entity PRIVATE sfml-graphics sfml-window sfml-system)
+
 
 enable_testing()
 
@@ -50,12 +66,16 @@ add_test(
     NAME test_sprites
     COMMAND $<TARGET_FILE:test_sprites>
 )
+add_test(
+    NAME test_entity
+    COMMAND $<TARGET_FILE:test_entity>
+)
 
-add_custom_command(
-    TARGET test_sprites
+add_custom_target(
+    load_assets
     POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E rm -R ${CMAKE_BINARY_DIR}/assets
-    COMMAND ${CMAKE_COMMAND} -E copy_directory_if_different ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/assets
+    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/assets
     VERBATIM
 )
 
