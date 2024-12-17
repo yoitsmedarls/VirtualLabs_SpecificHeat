@@ -15,42 +15,59 @@ FetchContent_Declare(SFML
     SYSTEM)
 FetchContent_MakeAvailable(SFML)
 
-include_directories("include/VirtualLabs"
-                    "include/VirtualLabs/Components"
-                    "include/VirtualLabs/Components/Physics"
-                    "include/VirtualLabs/Components/Physics/Container"
-                    "include/VirtualLabs/Components/Physics/Substance")
+include_directories(
+    ${CMAKE_SOURCE_DIR}/include/
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Container
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Substance
+)
+
+add_library(virtual-labs STATIC 
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entity.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/EntityManager.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/IComponent.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/PhysicsComponent.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Sprite2DComponent.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/HeatSource.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Room.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Substance/Substance.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Substance/Liquid.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Substance/Metal.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Container/Beaker.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Container/Calorimeter.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Container/Container.cpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entity.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/EntityManager.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/IComponent.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/PhysicsComponent.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Sprite2DComponent.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/HeatSource.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Room.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Substance/Substance.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Substance/Liquid.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Substance/Metal.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Container/Beaker.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Container/Calorimeter.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Container/Container.hpp
+)
+target_link_libraries(virtual-labs PRIVATE sfml-graphics sfml-window sfml-system)
 
 add_executable(main src/__main.cpp)
 target_link_libraries(main PRIVATE sfml-graphics sfml-window sfml-system)
 
-add_executable(test_substance
-               "test/__test_substance.cpp" 
-               "src/VirtualLabs/Components/Physics/Substance/Substance.cpp"
-               "src/VirtualLabs/Components/Physics/Substance/Liquid.cpp"
-               "src/VirtualLabs/Components/Physics/Substance/Metal.cpp")
+add_executable(test_substance test/__test_substance.cpp)
+target_link_libraries(test_substance PRIVATE virtual-labs)
 
-add_executable(test_container
-               "test/__test_container.cpp"
-               "src/VirtualLabs/Components/Physics/Substance/Substance.cpp"
-               "src/VirtualLabs/Components/Physics/Substance/Liquid.cpp"
-               "src/VirtualLabs/Components/Physics/Substance/Metal.cpp"
-               "src/VirtualLabs/Components/Physics/Container/Container.cpp")
+add_executable(test_container test/__test_container.cpp)
+target_link_libraries(test_container PRIVATE virtual-labs)
 
-add_executable(test_sprites
-               "test/__test_sprites.cpp"
-               "src/VirtualLabs/Components/IComponent.cpp"
-               "src/VirtualLabs/Components/Sprite2DComponent.cpp")
-target_link_libraries(test_sprites PRIVATE sfml-graphics sfml-window sfml-system)
+add_executable(test_sprites test/__test_sprites.cpp)
+target_link_libraries(test_sprites PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
 
-add_executable(test_entity
-               "test/__test_sprites.cpp"
-               "src/VirtualLabs/Components/IComponent.cpp"
-               "src/VirtualLabs/Components/Sprite2DComponent.cpp"
-               "src/VirtualLabs/Entity.cpp"
-               "src/VirtualLabs/EntityManager.cpp")
-target_link_libraries(test_entity PRIVATE sfml-graphics sfml-window sfml-system)
-
+add_executable(test_entity test/__test_sprites.cpp)
+target_link_libraries(test_entity PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
 
 enable_testing()
 
