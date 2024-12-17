@@ -47,7 +47,7 @@ int main()
     std::cout << "Launching window..." << std::endl;
 
     Sprite2DComponent mySprite = Sprite2DComponent(
-        "My Sprite", "../assets/img/my_sprite.png");
+        "My Sprite", "../assets/images/background.png");
 
     // Starts the program loop
     while (window.isOpen())
