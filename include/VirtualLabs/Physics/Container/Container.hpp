@@ -5,6 +5,8 @@
 #include "Liquid.hpp"
 #include "Metal.hpp"
 
+#include <memory>
+
 /**
  * @author @yoitsmedarls
  * @brief  The base class for all objects designed to 'contain' other objects
@@ -19,8 +21,8 @@ protected: // Class fields
     double m_totalVolume;
     double m_availableVolume;
     double m_topSurfaceArea;
-    Liquid *m_liquid;
-    Metal *m_metal;
+    std::shared_ptr<Liquid> m_liquid;
+    std::shared_ptr<Metal> m_metal;
 
 public: // Special methods
     /**
@@ -59,8 +61,8 @@ public: // Special methods
     Container(std::string name,
               double diameter,
               double height,
-              Liquid &liquid,
-              Metal &metal);
+              std::shared_ptr<Liquid> liquid,
+              std::shared_ptr<Metal> metal);
 
     /**
      * @brief   Copy constructor of the Container class.
@@ -93,14 +95,14 @@ public: // Getters and Setters
     double getHeight();
     double getVolume();
     double getTopSurfaceArea();
-    Liquid *getContainedLiquid();
-    Metal *getContainedMetal();
+    std::shared_ptr<Liquid> getContainedLiquid();
+    std::shared_ptr<Metal> getContainedMetal();
 
     void setName(std::string name);
     void setDiameter(double diameter);
     void setHeight(double height);
-    void addLiquid(Liquid &liquid);
-    void addMetal(Metal &metal);
+    void addLiquid(std::shared_ptr<Liquid> liquid);
+    void addMetal(std::shared_ptr<Metal> metal);
 
 public: // Other methods
     /**

@@ -11,7 +11,6 @@ class Calorimeter
 private: // Class fields
 public:  // Special methods
     Calorimeter();
-    Calorimeter();
     Calorimeter(const Calorimeter &copy);
     ~Calorimeter();
 

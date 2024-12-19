@@ -3,7 +3,7 @@
 
 #include "Container.hpp"
 #include "HeatSource.hpp"
-#include "Room.hpp"
+#include "Laboratory.hpp"
 
 /**
  * @author @yoitsmedarls
@@ -14,10 +14,9 @@ class Beaker : public Container
 {
 private:
     HeatSource *m_heatSource;
-    Room *m_room;
+    Laboratory *m_room;
 
 public: // Special methods
-    Beaker();
     Beaker();
     Beaker(const Beaker &copy);
     ~Beaker();

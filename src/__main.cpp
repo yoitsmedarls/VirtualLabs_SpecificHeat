@@ -1,7 +1,11 @@
-#include <iostream>
-
 #include <SFML/Graphics.hpp>
 #include <SFML/System.hpp>
+
+#include <iostream>
+#include <memory>
+
+#include "PhysicsManager.hpp"
+#include "Renderer.hpp"
 
 // Dimensions for the initial window launch
 #define WINDOW_HEIGHT 768
@@ -40,6 +44,30 @@ int main()
               << "    width: " << window.getSize().x << "px" << "\n"
               << "    height: " << window.getSize().y << "px" << "\n"
               << std::endl;
+
+    std::shared_ptr<Laboratory> lab = std::make_shared<Laboratory>("../assets/images/background.png");
+    lab->setAnchor(1, 1);
+    lab->setPositionRelativeToWindow(1, 1, window);
+
+    std::shared_ptr<Liquid> water = std::make_shared<Liquid>("Water", "../assets/images/water.png", 100, 1, 25, 4.186, 100, 0);
+    water->setAnchor(0, 1);
+    water->setPositionRelativeToWindow(0, 1, window);
+
+    std::shared_ptr<Metal> aluminum = std::make_shared<Metal>("Aluminum", "../assets/images/metal.png", 50, 2.7, 20, 0.903);
+    aluminum->setAnchor(2, 1);
+    aluminum->setPositionRelativeToWindow(2, 1, window);
+
+    // std::shared_ptr<Container> myContainer = std::make_shared<Container>("MyContainer", 5, 7);
+    // water->setAnchor(0, 0);
+
+    PhysicsManager::Instance().addLaboratory(lab);
+    PhysicsManager::Instance().addLiquid(water);
+    PhysicsManager::Instance().addMetal(aluminum);
+
+    // First line gets to be in front
+    Renderer::Instance().addRenderable(aluminum);
+    Renderer::Instance().addRenderable(lab);
+    Renderer::Instance().addRenderable(water);
 
     // Indicates program startup
     std::cout
@@ -112,6 +140,10 @@ int main()
         }
 
         window.clear();
+
+        PhysicsManager::Instance().UpdateProperties(FRAMERATE_LIMIT);
+        Renderer::Instance().RenderAll(window);
+
         window.display();
     }
 

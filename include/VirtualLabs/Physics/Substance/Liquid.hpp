@@ -2,13 +2,14 @@
 #define LIQUID
 
 #include "Substance.hpp"
+#include "Renderable.hpp"
 
 /**
  * @author @yoitsmedarls
  * @brief A child of the Substance class that defines the liquids that will be
  *        placed inside of containers (i.e. water).
  */
-class Liquid : public Substance
+class Liquid : public Substance, public Renderable
 {
 private: // Class fields
     double m_boilingPoint;
@@ -45,6 +46,7 @@ public: // Special methods
      *                             but who cares :P
      */
     Liquid(std::string name,
+           std::string textureFilePath,
            double mass,
            double density,
            double temperature,
@@ -75,7 +77,7 @@ public: // Operator overloads
      * @param copy
      * @return Liquid&
      */
-    inline Liquid &operator=(const Liquid &);
+    Liquid &operator=(const Liquid &);
 
 public: // Getters and Setters
     double getBoilingPoint();

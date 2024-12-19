@@ -36,8 +36,8 @@ Container::Container(const std::string name,
 Container::Container(const std::string name,
                      const double diameter,
                      const double height,
-                     Liquid &liquid,
-                     Metal &metal)
+                     std::shared_ptr<Liquid> liquid,
+                     std::shared_ptr<Metal> metal)
     : m_name(name),
       m_diameter(diameter),
       m_height(height),
@@ -110,7 +110,7 @@ double Container::getTopSurfaceArea()
     return m_topSurfaceArea;
 }
 
-Liquid *Container::getContainedLiquid()
+std::shared_ptr<Liquid> Container::getContainedLiquid()
 {
     try
     {
@@ -128,7 +128,7 @@ Liquid *Container::getContainedLiquid()
     return m_liquid;
 }
 
-Metal *Container::getContainedMetal()
+std::shared_ptr<Metal> Container::getContainedMetal()
 {
     try
     {
@@ -167,13 +167,13 @@ void Container::setHeight(double height)
     updateVolume();
 }
 
-void Container::addLiquid(Liquid &liquid)
+void Container::addLiquid(std::shared_ptr<Liquid> liquid)
 {
     try
     {
-        if (m_availableVolume < liquid.getVolume())
+        if (m_availableVolume < liquid->getVolume())
         {
-            throw std::logic_error("ERROR: Cannot place " + liquid.getName() +
+            throw std::logic_error("ERROR: Cannot place " + liquid->getName() +
                                    " inside " + m_name + ", not enough room.");
         }
     }
@@ -183,16 +183,16 @@ void Container::addLiquid(Liquid &liquid)
         exit(EXIT_FAILURE);
     }
 
-    m_liquid = &liquid;
-    m_availableVolume -= liquid.getVolume();
+    m_liquid = liquid;
+    m_availableVolume -= liquid->getVolume();
 }
-void Container::addMetal(Metal &metal)
+void Container::addMetal(std::shared_ptr<Metal> metal)
 {
     try
     {
-        if (m_availableVolume < metal.getVolume())
+        if (m_availableVolume < metal->getVolume())
         {
-            throw std::logic_error("ERROR: Cannot place " + metal.getName() +
+            throw std::logic_error("ERROR: Cannot place " + metal->getName() +
                                    " inside " + m_name + ", not enough room.");
         }
     }
@@ -202,8 +202,8 @@ void Container::addMetal(Metal &metal)
         exit(EXIT_FAILURE);
     }
 
-    m_metal = &metal;
-    m_availableVolume -= metal.getVolume();
+    m_metal = metal;
+    m_availableVolume -= metal->getVolume();
 }
 
 /* Other methods */
