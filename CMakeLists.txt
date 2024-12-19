@@ -18,39 +18,39 @@ FetchContent_MakeAvailable(SFML)
 include_directories(
     ${CMAKE_SOURCE_DIR}/include/
     ${CMAKE_SOURCE_DIR}/include/VirtualLabs
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Container
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Substance
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Container
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Substance
 )
 
 add_library(virtual-labs STATIC 
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entity.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/EntityManager.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/IComponent.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/PhysicsComponent.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Sprite2DComponent.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/HeatSource.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Room.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Substance/Substance.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Substance/Liquid.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Substance/Metal.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Container/Beaker.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Container/Calorimeter.cpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Components/Physics/Container/Container.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entity.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/EntityManager.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/IComponent.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/PhysicsComponent.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Sprite2DComponent.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/HeatSource.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Room.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Substance/Substance.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Substance/Liquid.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Substance/Metal.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Container/Beaker.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Container/Calorimeter.hpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Components/Physics/Container/Container.hpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/Entity.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/EntityManager.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/IComponent.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/PhysicsComponent.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/Sprite2DComponent.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/HeatSource.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Room.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Substance/Substance.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Substance/Liquid.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Substance/Metal.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Container/Beaker.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Container/Calorimeter.cpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Container/Container.cpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/Entity.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/EntityManager.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/IComponent.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/PhysicsComponent.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/Sprite2DComponent.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/HeatSource.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Room.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Substance/Substance.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Substance/Liquid.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Substance/Metal.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Container/Beaker.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Container/Calorimeter.hpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Container/Container.hpp
 )
 target_link_libraries(virtual-labs PRIVATE sfml-graphics sfml-window sfml-system)
 
