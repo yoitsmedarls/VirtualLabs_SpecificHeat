@@ -30,10 +30,10 @@ namespace vl
     void Entity::addRenderComponent(std::string name,
                                     std::string textureFilePath)
     {
-        std::shared_ptr<RenderComponent> RenderComponent =
-            std::make_shared<RenderComponent>(name, textureFilePath);
+        std::shared_ptr<RenderableComponent> renderComponent =
+            std::make_shared<RenderableComponent>(name, textureFilePath);
 
-        m_components.push_back(RenderComponent);
+        m_components.push_back(renderComponent);
     }
 
     void Entity::renderAllComponents(sf::RenderWindow &window)

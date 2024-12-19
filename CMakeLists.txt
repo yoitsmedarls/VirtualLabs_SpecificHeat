@@ -17,86 +17,54 @@ FetchContent_MakeAvailable(SFML)
 
 include_directories(
     ${CMAKE_SOURCE_DIR}/include/
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Core
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Container
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Substance
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/UI
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Event
 )
 
-set(VL_PHYSICS_MANAGER_SRC
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/PhysicsManager.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/PhysicsManager.hpp
+set(VIRTUAL_LABS_SRC
+    ${CMAKE_SOURCE_DIR}/src/Beaker.cpp
+    ${CMAKE_SOURCE_DIR}/include/Beaker.hpp
+    # ${CMAKE_SOURCE_DIR}/src/Button.cpp
+    # ${CMAKE_SOURCE_DIR}/include/Button.hpp
+    ${CMAKE_SOURCE_DIR}/src/Calorimeter.cpp
+    ${CMAKE_SOURCE_DIR}/include/Calorimeter.hpp
+    # ${CMAKE_SOURCE_DIR}/src/Clickable.cpp
+    # ${CMAKE_SOURCE_DIR}/include/Clickable.hpp
+    ${CMAKE_SOURCE_DIR}/src/Container.cpp
+    ${CMAKE_SOURCE_DIR}/include/Container.hpp
+    # ${CMAKE_SOURCE_DIR}/src/Entity.cpp
+    # ${CMAKE_SOURCE_DIR}/include/Entity.hpp
+    # ${CMAKE_SOURCE_DIR}/src/EntityManager.cpp
+    # ${CMAKE_SOURCE_DIR}/include/EntityManager.hpp
+    ${CMAKE_SOURCE_DIR}/src/HeatPlate.cpp
+    ${CMAKE_SOURCE_DIR}/include/HeatPlate.hpp
+    # ${CMAKE_SOURCE_DIR}/src/IComponent.cpp
+    # ${CMAKE_SOURCE_DIR}/include/IComponent.hpp
+    ${CMAKE_SOURCE_DIR}/src/Laboratory.cpp
+    ${CMAKE_SOURCE_DIR}/include/Laboratory.hpp
+    ${CMAKE_SOURCE_DIR}/src/Liquid.cpp
+    ${CMAKE_SOURCE_DIR}/include/Liquid.hpp
+    ${CMAKE_SOURCE_DIR}/src/Metal.cpp
+    ${CMAKE_SOURCE_DIR}/include/Metal.hpp
+    # ${CMAKE_SOURCE_DIR}/src/PhysicsComponent.cpp
+    # ${CMAKE_SOURCE_DIR}/include/PhysicsComponent.hpp
+    # ${CMAKE_SOURCE_DIR}/src/PhysicsManager.cpp
+    # ${CMAKE_SOURCE_DIR}/include/PhysicsManager.hpp
+    # ${CMAKE_SOURCE_DIR}/src/Renderable.cpp
+    # ${CMAKE_SOURCE_DIR}/include/Renderable.hpp
+    # ${CMAKE_SOURCE_DIR}/src/RenderableComponent.cpp
+    # ${CMAKE_SOURCE_DIR}/include/RenderableComponent.hpp
+    # ${CMAKE_SOURCE_DIR}/src/Renderer.cpp
+    # ${CMAKE_SOURCE_DIR}/include/Renderer.hpp
+    ${CMAKE_SOURCE_DIR}/src/Scale.cpp
+    ${CMAKE_SOURCE_DIR}/include/Scale.hpp
+    ${CMAKE_SOURCE_DIR}/src/Substance.cpp
+    ${CMAKE_SOURCE_DIR}/include/Substance.hpp
 )
 
-set(VL_CORE_SRC
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Core/Laboratory.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Core/Laboratory.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Core/HeatPlate.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Core/HeatPlate.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Core/Scale.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Core/Scale.hpp
-)
-
-set(VL_SUBSTANCE_SRC
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Substance/Substance.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Substance/Substance.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Substance/Liquid.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Substance/Liquid.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Substance/Metal.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Substance/Metal.hpp
-)
-
-set(VL_CONTAINER_SRC
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Container/Container.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Container/Container.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Container/Beaker.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Container/Beaker.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Container/Calorimeter.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Container/Calorimeter.hpp
-)
-
-set(VL_UI_SRC
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/UI/Renderable.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/UI/Renderable.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/UI/Renderer.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/UI/Renderer.hpp
-)
-
-set(VL_EVENT_SRC
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Event/Clickable.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Event/Clickable.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Event/Button.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Event/Button.hpp
-)
-
-set(VL_ENTITY_SRC
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/Entity.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/Entity.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/EntityManager.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/EntityManager.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/IComponent.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/IComponent.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/PhysicsComponent.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/PhysicsComponent.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/RenderComponent.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/RenderComponent.hpp
-)
-
-add_library(virtual-labs STATIC 
-    ${VL_PHYSICS_MANAGER_SRC}
-    ${VL_CORE_SRC}
-    ${VL_SUBSTANCE_SRC}
-    ${VL_CONTAINER_SRC}
-    ${VL_UI_SRC}
-)
+add_library(virtual-labs STATIC ${VIRTUAL_LABS_SRC})
 
 target_link_libraries(virtual-labs PRIVATE sfml-graphics sfml-window sfml-system)
 
-add_executable(main src/__main.cpp)
+add_executable(main test/__main.cpp)
 target_link_libraries(main PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
 
 # add_executable(test_substance test/__test_substance.cpp)
@@ -105,8 +73,8 @@ target_link_libraries(main PRIVATE virtual-labs sfml-graphics sfml-window sfml-s
 # add_executable(test_container test/__test_container.cpp)
 # target_link_libraries(test_container PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
 
-add_executable(test_renderable test/__test_renderable.cpp)
-target_link_libraries(test_renderable PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
+# add_executable(test_renderable test/__test_renderable.cpp)
+# target_link_libraries(test_renderable PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
 
 # add_executable(test_entity test/__test_sprites.cpp)
 # target_link_libraries(test_entity PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
@@ -121,10 +89,10 @@ enable_testing()
 #     NAME test_container
 #     COMMAND $<TARGET_FILE:test_container>
 # )
-add_test(
-    NAME test_renderable
-    COMMAND $<TARGET_FILE:test_renderable>
-)
+# add_test(
+#     NAME test_renderable
+#     COMMAND $<TARGET_FILE:test_renderable>
+# )
 # add_test(
 #     NAME test_entity
 #     COMMAND $<TARGET_FILE:test_entity>

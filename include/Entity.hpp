@@ -5,7 +5,7 @@
 #include <string>
 #include <memory>
 #include "IComponent.hpp"
-#include "RenderComponent.hpp"
+#include "RenderableComponent.hpp"
 
 namespace vl
 {

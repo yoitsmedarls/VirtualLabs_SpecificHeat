@@ -6,7 +6,6 @@ class Clickable
 private: // Class fields
 public:  // Special methods
     Clickable();
-    Clickable();
     Clickable(const Clickable &copy);
     ~Clickable();
 

@@ -8,27 +8,23 @@
 
 namespace vl
 {
-    class RenderComponent : public IComponent
+    class RenderableComponent : public IComponent
     {
     private: // Class fields
-        std::string m_name;
         sf::Texture m_texture;
         sf::Sprite m_sprite;
 
     public: // Special methods
-        RenderComponent(std::string name,
-                        std::string textureFilePath);
-
-        RenderComponent(const RenderComponent &copy);
-
-        ~RenderComponent();
+        RenderableComponent(std::string textureFilePath);
+        RenderableComponent(const RenderableComponent &copy);
+        ~RenderableComponent();
 
     public: // Operator overloads
-        RenderComponent &operator=(const RenderComponent &copy);
+        RenderableComponent &operator=(const RenderableComponent &copy);
 
     public: // Getters and Setters
     public: // Other methods
-        void renderComponent(sf::RenderWindow &targetWindow);
+        void render(sf::RenderWindow &targetWindow);
     };
 }
 
