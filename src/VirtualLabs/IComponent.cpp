@@ -12,7 +12,7 @@ namespace vl
 
     IComponent &IComponent::operator=(const IComponent &copy)
     {
-        std::cout << "Sprite2DComponent | Copy assignment operator used...\n";
+        std::cout << "RenderComponent | Copy assignment operator used...\n";
 
         if (&copy == this)
         {

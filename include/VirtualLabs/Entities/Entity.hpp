@@ -5,7 +5,7 @@
 #include <string>
 #include <memory>
 #include "IComponent.hpp"
-#include "Sprite2DComponent.hpp"
+#include "RenderComponent.hpp"
 
 namespace vl
 {
@@ -24,8 +24,8 @@ namespace vl
         Entity &operator=(const Entity &copy);
 
     public: // Getters and Setters
-        void addSprite2DComponent(std::string name,
-                                  std::string textureFilePath);
+        void addRenderComponent(std::string name,
+                                std::string textureFilePath);
         void renderAllComponents(sf::RenderWindow &window);
 
     public: // Other methods

@@ -1,15 +1,15 @@
 #ifndef RENDERER
 #define RENDERER
 
-#include <vector>
 #include <memory>
+#include <unordered_map>
 
 #include "Renderable.hpp"
 
 class Renderer
 {
 private:
-    std::vector<std::shared_ptr<Renderable>> m_renderables;
+    std::unordered_map<std::string, std::shared_ptr<Renderable>> m_renderables;
 
 private:
     Renderer() {};
@@ -18,7 +18,7 @@ private:
 public:
     static Renderer &Instance();
 
-    void addRenderable(std::shared_ptr<Renderable> renderable);
+    void addRenderable(std::string name, std::shared_ptr<Renderable> renderable);
     void RenderAll(sf::RenderWindow &window);
 };
 

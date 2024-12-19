@@ -33,7 +33,7 @@ sf::Sprite *Renderable::getRenderable()
     return &m_sprite;
 }
 
-void Renderable::setAnchor(int xIndex, int yIndex)
+void Renderable::setOrigin(int xIndex, int yIndex)
 {
     int xAnchor;
     int yAnchor;
@@ -75,6 +75,16 @@ void Renderable::setAnchor(int xIndex, int yIndex)
     }
 
     m_sprite.setOrigin(xAnchor, yAnchor);
+}
+
+sf::Vector2f Renderable::getOrigin()
+{
+    return m_sprite.getOrigin();
+}
+
+void Renderable::setPosition(int x, int y)
+{
+    m_sprite.setPosition(x, y);
 }
 
 void Renderable::setPositionRelativeToWindow(int xIndex, int yIndex, sf::RenderWindow &window)
@@ -119,6 +129,11 @@ void Renderable::setPositionRelativeToWindow(int xIndex, int yIndex, sf::RenderW
     }
 
     m_sprite.setPosition(xPosition, yPosition);
+}
+
+sf::Vector2f Renderable::getPosition()
+{
+    return m_sprite.getPosition();
 }
 
 void Renderable::Render(sf::RenderWindow &window)

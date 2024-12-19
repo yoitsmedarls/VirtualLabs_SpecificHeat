@@ -9,7 +9,7 @@
  * @brief  A child of the Substance class that defines the metals that will be
  *         placed inside of containers (i.e. aluminum).
  */
-class Metal : public Substance, public Renderable
+class Metal : public Substance
 {
 private: // Class fields
     double m_sideLength;
@@ -40,7 +40,6 @@ public: // Special methods
      *                             substance.
      */
     Metal(std::string name,
-          std::string textureFilePath,
           double mass,
           double density,
           double temperature,

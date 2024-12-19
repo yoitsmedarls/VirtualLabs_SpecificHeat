@@ -21,8 +21,12 @@ public: // Operator overloads
 
 public: // Other methods
     sf::Sprite *getRenderable();
-    void setAnchor(int xIndex, int yIndex);
+    void setOrigin(int xIndex, int yIndex);
+    sf::Vector2f getOrigin();
+
+    void setPosition(int x, int y);
     void setPositionRelativeToWindow(int xIndex, int yIndex, sf::RenderWindow &window);
+    sf::Vector2f getPosition();
 
     void Render(sf::RenderWindow &window);
 };

@@ -9,7 +9,7 @@
  * @brief A child of the Substance class that defines the liquids that will be
  *        placed inside of containers (i.e. water).
  */
-class Liquid : public Substance, public Renderable
+class Liquid : public Substance
 {
 private: // Class fields
     double m_boilingPoint;
@@ -46,7 +46,6 @@ public: // Special methods
      *                             but who cares :P
      */
     Liquid(std::string name,
-           std::string textureFilePath,
            double mass,
            double density,
            double temperature,

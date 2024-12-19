@@ -7,14 +7,12 @@
 
 Metal::Metal()
     : Substance(),
-      Renderable(),
       m_sideLength(0)
 {
     std::cout << "Metal | Default constructed...\n";
 }
 
 Metal::Metal(std::string name,
-             std::string textureFilePath,
              double mass,
              double density,
              double temperature,
@@ -24,7 +22,6 @@ Metal::Metal(std::string name,
                 density,
                 temperature,
                 specificHeatCapacity),
-      Renderable(textureFilePath),
       m_sideLength(std::cbrt(mass / density))
 {
     std::cout << "Metal | " << m_name << " constructed...\n";
@@ -32,7 +29,6 @@ Metal::Metal(std::string name,
 
 Metal::Metal(const Metal &copy)
     : Substance(copy),
-      Renderable(copy),
       m_sideLength(copy.m_sideLength)
 {
     std::cout << "Metal | " << m_name << " (copy) constructed...\n";

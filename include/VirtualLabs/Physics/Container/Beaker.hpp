@@ -2,7 +2,7 @@
 #define BEAKER
 
 #include "Container.hpp"
-#include "HeatSource.hpp"
+#include "HeatPlate.hpp"
 #include "Laboratory.hpp"
 
 /**
@@ -10,14 +10,19 @@
  * @brief  A child of the Container class. Beaker is a non-isolated container
  *         with methods for Beaker-specific tasks in the simulation.
  */
-class Beaker : public Container
+class Beaker : public Container, public Renderable
 {
 private:
-    HeatSource *m_heatSource;
-    Laboratory *m_room;
-
 public: // Special methods
     Beaker();
+    Beaker(std::string textureFilePath,
+           double diameter,
+           double height);
+    Beaker(std::string textureFilePath,
+           double diameter,
+           double height,
+           std::shared_ptr<Liquid> liquid,
+           std::shared_ptr<Metal> metal);
     Beaker(const Beaker &copy);
     ~Beaker();
 

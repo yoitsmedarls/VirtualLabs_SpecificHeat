@@ -23,7 +23,8 @@ include_directories(
     ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Core
     ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Container
     ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Substance
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Render
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/UI
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Event
 )
 
 set(VL_PHYSICS_MANAGER_SRC
@@ -34,8 +35,10 @@ set(VL_PHYSICS_MANAGER_SRC
 set(VL_CORE_SRC
     ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Core/Laboratory.cpp
     ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Core/Laboratory.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Core/HeatSource.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Core/HeatSource.hpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Core/HeatPlate.cpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Core/HeatPlate.hpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Physics/Core/Scale.cpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Core/Scale.hpp
 )
 
 set(VL_SUBSTANCE_SRC
@@ -56,11 +59,18 @@ set(VL_CONTAINER_SRC
     ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Physics/Container/Calorimeter.hpp
 )
 
-set(VL_RENDER_SRC
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Render/Renderable.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Render/Renderable.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Render/Renderer.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Render/Renderer.hpp
+set(VL_UI_SRC
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/UI/Renderable.cpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/UI/Renderable.hpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/UI/Renderer.cpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/UI/Renderer.hpp
+)
+
+set(VL_EVENT_SRC
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Event/Clickable.cpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Event/Clickable.hpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Event/Button.cpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Event/Button.hpp
 )
 
 set(VL_ENTITY_SRC
@@ -72,8 +82,8 @@ set(VL_ENTITY_SRC
     ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/IComponent.hpp
     ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/PhysicsComponent.cpp
     ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/PhysicsComponent.hpp
-    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/Sprite2DComponent.cpp
-    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/Sprite2DComponent.hpp
+    ${CMAKE_SOURCE_DIR}/src/VirtualLabs/Entities/RenderComponent.cpp
+    ${CMAKE_SOURCE_DIR}/include/VirtualLabs/Entities/RenderComponent.hpp
 )
 
 add_library(virtual-labs STATIC 
@@ -81,7 +91,7 @@ add_library(virtual-labs STATIC
     ${VL_CORE_SRC}
     ${VL_SUBSTANCE_SRC}
     ${VL_CONTAINER_SRC}
-    ${VL_RENDER_SRC}
+    ${VL_UI_SRC}
 )
 
 target_link_libraries(virtual-labs PRIVATE sfml-graphics sfml-window sfml-system)
@@ -120,11 +130,11 @@ add_test(
 #     COMMAND $<TARGET_FILE:test_entity>
 # )
 
-add_custom_target(
-    load_assets
+add_custom_command(
+    TARGET main
     POST_BUILD
     COMMAND ${CMAKE_COMMAND} -E rm -R ${CMAKE_BINARY_DIR}/assets
-    COMMAND ${CMAKE_COMMAND} -E copy ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/assets
+    COMMAND ${CMAKE_COMMAND} -E copy_directory ${CMAKE_SOURCE_DIR}/assets ${CMAKE_BINARY_DIR}/assets
     VERBATIM
 )
 

@@ -6,9 +6,9 @@
 /* Special methods */
 
 Container::Container()
-    : m_name(""),
-      m_diameter(0),
+    : m_diameter(0),
       m_height(0),
+      m_totalMass(0),
       m_totalVolume(0),
       m_availableVolume(0),
       m_topSurfaceArea(0),
@@ -18,55 +18,49 @@ Container::Container()
     std::cout << "Container | Default constructed...\n";
 }
 
-Container::Container(const std::string name,
-                     const double diameter,
+Container::Container(const double diameter,
                      const double height)
-    : m_name(name),
-      m_diameter(diameter),
+    : m_diameter(diameter),
       m_height(height),
+      m_totalMass(0),
       m_totalVolume((M_PI * pow((diameter / 2), 2)) * height),
       m_availableVolume(m_totalVolume),
       m_topSurfaceArea(M_PI * pow((diameter / 2), 2)),
       m_liquid(nullptr),
       m_metal(nullptr)
 {
-    std::cout << "Container | " << m_name << " constructed with no substances...\n";
 }
 
-Container::Container(const std::string name,
-                     const double diameter,
+Container::Container(const double diameter,
                      const double height,
                      std::shared_ptr<Liquid> liquid,
                      std::shared_ptr<Metal> metal)
-    : m_name(name),
-      m_diameter(diameter),
+    : m_diameter(diameter),
       m_height(height),
       m_totalVolume((M_PI * pow((diameter / 2), 2)) * height),
       m_availableVolume(m_totalVolume),
       m_topSurfaceArea(M_PI * pow((diameter / 2), 2))
 {
-    std::cout << "Container | " << m_name << " constructed with substances ...\n";
-
     addLiquid(liquid);
     addMetal(metal);
+
+    m_totalMass = liquid->getMass() + metal->getMass();
 }
 
 Container::Container(const Container &copy)
-    : m_name(copy.m_name),
-      m_diameter(copy.m_diameter),
+    : m_diameter(copy.m_diameter),
       m_height(copy.m_height),
+      m_totalMass(copy.m_totalMass),
       m_totalVolume(copy.m_totalVolume),
       m_availableVolume(copy.m_availableVolume),
       m_topSurfaceArea(copy.m_topSurfaceArea),
       m_liquid(copy.m_liquid),
       m_metal(copy.m_metal)
 {
-    std::cout << "Container | " << m_name << " (copy) constructed...\n";
 }
 
 Container::~Container()
 {
-    std::cout << "Container | " << m_name << " destroyed...\n";
 }
 
 /* Operator overloads */
@@ -85,11 +79,6 @@ Container &Container::operator=(const Container &copy)
 
 /* Getters */
 
-std::string Container::getName()
-{
-    return m_name;
-}
-
 double Container::getDiameter()
 {
     return m_diameter;
@@ -100,9 +89,19 @@ double Container::getHeight()
     return m_height;
 }
 
-double Container::getVolume()
+double Container::getTotalMass()
+{
+    return m_totalMass;
+}
+
+double Container::getTotalVolume()
 {
     return m_totalVolume;
+}
+
+double Container::getAvailableVolume()
+{
+    return m_availableVolume;
 }
 
 double Container::getTopSurfaceArea()
@@ -116,7 +115,7 @@ std::shared_ptr<Liquid> Container::getContainedLiquid()
     {
         if (m_liquid == nullptr)
         {
-            throw std::logic_error("ERROR: " + m_name + " contains no liquid.");
+            throw std::logic_error("ERROR: Container contains no liquid.");
         }
     }
     catch (const std::exception &error)
@@ -134,7 +133,7 @@ std::shared_ptr<Metal> Container::getContainedMetal()
     {
         if (m_metal == nullptr)
         {
-            throw std::logic_error("ERROR: " + m_name + " contains no metal.");
+            throw std::logic_error("ERROR: Container contains no metal.");
         }
     }
     catch (const std::exception &error)
@@ -147,11 +146,6 @@ std::shared_ptr<Metal> Container::getContainedMetal()
 }
 
 /* Setters */
-
-void Container::setName(std::string name)
-{
-    m_name = name;
-}
 
 void Container::setDiameter(double diameter)
 {
@@ -174,7 +168,7 @@ void Container::addLiquid(std::shared_ptr<Liquid> liquid)
         if (m_availableVolume < liquid->getVolume())
         {
             throw std::logic_error("ERROR: Cannot place " + liquid->getName() +
-                                   " inside " + m_name + ", not enough room.");
+                                   " inside Container, not enough room.");
         }
     }
     catch (const std::exception &error)
@@ -193,7 +187,7 @@ void Container::addMetal(std::shared_ptr<Metal> metal)
         if (m_availableVolume < metal->getVolume())
         {
             throw std::logic_error("ERROR: Cannot place " + metal->getName() +
-                                   " inside " + m_name + ", not enough room.");
+                                   " inside Container, not enough room.");
         }
     }
     catch (const std::exception &error)
@@ -220,8 +214,7 @@ void Container::updateVolume()
 
 void Container::printProperties()
 {
-    std::cout << m_name << " Properties:" << "\n"
-              << " Name: " << m_name << "\n"
+    std::cout << "Container Properties:" << "\n"
               << " Diameter: " << m_diameter << "\n"
               << " Height: " << m_height << "\n"
               << " Total Volume: " << m_totalVolume << "\n"

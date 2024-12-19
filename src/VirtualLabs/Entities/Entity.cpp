@@ -27,13 +27,13 @@ namespace vl
         return *this;
     }
 
-    void Entity::addSprite2DComponent(std::string name,
-                                      std::string textureFilePath)
+    void Entity::addRenderComponent(std::string name,
+                                    std::string textureFilePath)
     {
-        std::shared_ptr<Sprite2DComponent> sprite2DComponent =
-            std::make_shared<Sprite2DComponent>(name, textureFilePath);
+        std::shared_ptr<RenderComponent> RenderComponent =
+            std::make_shared<RenderComponent>(name, textureFilePath);
 
-        m_components.push_back(sprite2DComponent);
+        m_components.push_back(RenderComponent);
     }
 
     void Entity::renderAllComponents(sf::RenderWindow &window)

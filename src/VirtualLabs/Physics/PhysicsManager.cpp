@@ -16,14 +16,24 @@ std::shared_ptr<Laboratory> PhysicsManager::getLaboratory()
     return m_laboratory;
 }
 
-void PhysicsManager::addHeatSource(std::shared_ptr<HeatSource> p_heatSource)
+void PhysicsManager::addHeatPlate(std::shared_ptr<HeatPlate> p_HeatPlate)
 {
-    m_heatSource = p_heatSource;
+    m_HeatPlate = p_HeatPlate;
 }
 
-std::shared_ptr<HeatSource> PhysicsManager::getHeatSource()
+std::shared_ptr<HeatPlate> PhysicsManager::getHeatPlate()
 {
-    return m_heatSource;
+    return m_HeatPlate;
+}
+
+void PhysicsManager::addScale(std::shared_ptr<Scale> p_scale)
+{
+    m_scale = p_scale;
+}
+
+std::shared_ptr<Scale> PhysicsManager::getScale()
+{
+    return m_scale;
 }
 
 void PhysicsManager::addLiquid(std::shared_ptr<Liquid> p_liquid)

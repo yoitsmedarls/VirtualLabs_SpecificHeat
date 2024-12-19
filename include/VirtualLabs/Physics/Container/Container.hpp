@@ -15,9 +15,9 @@
 class Container
 {
 protected: // Class fields
-    std::string m_name;
     double m_diameter;
     double m_height;
+    double m_totalMass;
     double m_totalVolume;
     double m_availableVolume;
     double m_topSurfaceArea;
@@ -42,8 +42,7 @@ public: // Special methods
      * @param diameter
      * @param height
      */
-    Container(std::string name,
-              double diameter,
+    Container(double diameter,
               double height);
 
     /**
@@ -58,8 +57,7 @@ public: // Special methods
      * @param liquid
      * @param metal
      */
-    Container(std::string name,
-              double diameter,
+    Container(double diameter,
               double height,
               std::shared_ptr<Liquid> liquid,
               std::shared_ptr<Metal> metal);
@@ -90,15 +88,15 @@ public: // Operator overloads
     Container &operator=(const Container &copy);
 
 public: // Getters and Setters
-    std::string getName();
     double getDiameter();
     double getHeight();
-    double getVolume();
+    double getTotalMass();
+    double getTotalVolume();
+    double getAvailableVolume();
     double getTopSurfaceArea();
     std::shared_ptr<Liquid> getContainedLiquid();
     std::shared_ptr<Metal> getContainedMetal();
 
-    void setName(std::string name);
     void setDiameter(double diameter);
     void setHeight(double height);
     void addLiquid(std::shared_ptr<Liquid> liquid);

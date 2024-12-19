@@ -1,12 +1,13 @@
-#ifndef VIRTUAL_LABS_ENTITY_MANAGER
-#define VIRTUAL_LABS_ENTITY_MANAGER
+#ifndef PHYSICS_MANAGER
+#define PHYSICS_MANAGER
 
 #include <string>
 #include <memory>
 #include <unordered_map>
 
 #include "Laboratory.hpp"
-#include "HeatSource.hpp"
+#include "HeatPlate.hpp"
+#include "Scale.hpp"
 #include "Substance.hpp"
 #include "Liquid.hpp"
 #include "Metal.hpp"
@@ -18,7 +19,8 @@ class PhysicsManager
 {
 private:
     std::shared_ptr<Laboratory> m_laboratory;
-    std::shared_ptr<HeatSource> m_heatSource;
+    std::shared_ptr<HeatPlate> m_HeatPlate;
+    std::shared_ptr<Scale> m_scale;
     std::shared_ptr<Liquid> m_liquid;
     std::shared_ptr<Metal> m_metal;
     std::shared_ptr<Beaker> m_beaker;
@@ -34,8 +36,11 @@ public:
     void addLaboratory(std::shared_ptr<Laboratory> p_laboratory);
     std::shared_ptr<Laboratory> getLaboratory();
 
-    void addHeatSource(std::shared_ptr<HeatSource> p_heatSource);
-    std::shared_ptr<HeatSource> getHeatSource();
+    void addHeatPlate(std::shared_ptr<HeatPlate> p_HeatPlate);
+    std::shared_ptr<HeatPlate> getHeatPlate();
+
+    void addScale(std::shared_ptr<Scale> p_scale);
+    std::shared_ptr<Scale> getScale();
 
     void addLiquid(std::shared_ptr<Liquid> p_liquid);
     std::shared_ptr<Liquid> getLiquid();

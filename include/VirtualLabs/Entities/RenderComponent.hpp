@@ -8,7 +8,7 @@
 
 namespace vl
 {
-    class Sprite2DComponent : public IComponent
+    class RenderComponent : public IComponent
     {
     private: // Class fields
         std::string m_name;
@@ -16,15 +16,15 @@ namespace vl
         sf::Sprite m_sprite;
 
     public: // Special methods
-        Sprite2DComponent(std::string name,
-                          std::string textureFilePath);
+        RenderComponent(std::string name,
+                        std::string textureFilePath);
 
-        Sprite2DComponent(const Sprite2DComponent &copy);
+        RenderComponent(const RenderComponent &copy);
 
-        ~Sprite2DComponent();
+        ~RenderComponent();
 
     public: // Operator overloads
-        Sprite2DComponent &operator=(const Sprite2DComponent &copy);
+        RenderComponent &operator=(const RenderComponent &copy);
 
     public: // Getters and Setters
     public: // Other methods

@@ -6,7 +6,6 @@
 
 Liquid::Liquid()
     : Substance(),
-      Renderable(),
       m_boilingPoint(0),
       m_freezingPoint(0)
 {
@@ -14,7 +13,6 @@ Liquid::Liquid()
 }
 
 Liquid::Liquid(std::string name,
-               std::string textureFilePath,
                double mass,
                double density,
                double temperature,
@@ -26,7 +24,6 @@ Liquid::Liquid(std::string name,
                 density,
                 temperature,
                 specificHeatCapacity),
-      Renderable(textureFilePath),
       m_boilingPoint(boilingPoint),
       m_freezingPoint(freezingPoint)
 {
@@ -35,7 +32,6 @@ Liquid::Liquid(std::string name,
 
 Liquid::Liquid(const Liquid &copy)
     : Substance(copy),
-      Renderable(copy),
       m_boilingPoint(copy.m_boilingPoint),
       m_freezingPoint(copy.m_freezingPoint)
 {
