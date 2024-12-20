@@ -21,6 +21,7 @@ public: // Operator overloads
 
 public: // Other methods
     sf::Sprite *getRenderable();
+    void setTextureFromFilePath(std::string textureFilePath);
     void setOrigin(int xIndex, int yIndex);
     sf::Vector2f getOrigin();
 

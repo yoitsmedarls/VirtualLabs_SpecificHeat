@@ -6,9 +6,12 @@ Renderer &Renderer::Instance()
     return *instance;
 }
 
-void Renderer::addRenderable(std::string name, std::shared_ptr<Renderable> renderable)
+std::shared_ptr<Renderable> Renderer::createRenderable(std::string name, std::string textureFilePath)
 {
+    std::shared_ptr<Renderable> renderable = std::make_shared<Renderable>(textureFilePath);
     m_renderables.insert(std::make_pair(name, renderable));
+
+    return renderable;
 }
 
 void Renderer::RenderAll(sf::RenderWindow &window)

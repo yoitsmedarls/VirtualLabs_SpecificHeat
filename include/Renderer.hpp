@@ -18,7 +18,7 @@ private:
 public:
     static Renderer &Instance();
 
-    void addRenderable(std::string name, std::shared_ptr<Renderable> renderable);
+    std::shared_ptr<Renderable> createRenderable(std::string name, std::string textureFilePath);
     void RenderAll(sf::RenderWindow &window);
 };
 

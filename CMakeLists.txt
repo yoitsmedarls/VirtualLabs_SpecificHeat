@@ -22,6 +22,8 @@ include_directories(
 set(VIRTUAL_LABS_SRC
     ${CMAKE_SOURCE_DIR}/src/Renderable.cpp
     ${CMAKE_SOURCE_DIR}/include/Renderable.hpp
+    ${CMAKE_SOURCE_DIR}/src/Renderer.cpp
+    ${CMAKE_SOURCE_DIR}/include/Renderer.hpp
 
     ${CMAKE_SOURCE_DIR}/src/TemperatureManager.cpp
     ${CMAKE_SOURCE_DIR}/include/TemperatureManager.hpp
@@ -70,8 +72,8 @@ target_link_libraries(virtual-labs PRIVATE sfml-graphics sfml-window sfml-system
 add_executable(main test/__main.cpp)
 target_link_libraries(main PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
 
-add_executable(test_engine test/__test_engine.cpp)
-target_link_libraries(test_engine PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
+# add_executable(test_engine test/__test_engine.cpp)
+# target_link_libraries(test_engine PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
 
 # add_executable(test_substance test/__test_substance.cpp)
 # target_link_libraries(test_substance PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)

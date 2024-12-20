@@ -33,6 +33,12 @@ sf::Sprite *Renderable::getRenderable()
     return &m_sprite;
 }
 
+void Renderable::setTextureFromFilePath(std::string textureFilePath)
+{
+    m_texture.loadFromFile(textureFilePath);
+    m_sprite.setTexture(m_texture);
+}
+
 void Renderable::setOrigin(int xIndex, int yIndex)
 {
     int xAnchor;
