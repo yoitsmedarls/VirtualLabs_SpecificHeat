@@ -1,86 +1,75 @@
 #include "Metal.hpp"
 
-#include <iostream>
 #include <cmath>
 
-/* Special methods */
-
-Metal::Metal()
-    : Substance(),
-      m_sideLength(0)
+namespace vl
 {
-    std::cout << "Metal | Default constructed...\n";
-}
+    /** Special member functions **********************************************/
 
-Metal::Metal(std::string name,
-             double mass,
-             double density,
-             double temperature,
-             double specificHeatCapacity)
-    : Substance(name,
-                mass,
-                density,
-                temperature,
-                specificHeatCapacity),
-      m_sideLength(std::cbrt(mass / density))
-{
-    std::cout << "Metal | " << m_name << " constructed...\n";
-}
-
-Metal::Metal(const Metal &copy)
-    : Substance(copy),
-      m_sideLength(copy.m_sideLength)
-{
-    std::cout << "Metal | " << m_name << " (copy) constructed...\n";
-}
-
-Metal::~Metal()
-{
-    std::cout << "Metal | " << m_name << " destroyed...\n";
-}
-
-/* Operator overloads */
-
-Metal &Metal::operator=(const Metal &copy)
-{
-    std::cout << "Metal | Copy assignment operator used...\n";
-
-    if (&copy == this)
+    Metal::Metal()
+        : Substance(),
+          m_sideLength(0)
     {
+    }
+
+    Metal::Metal(double mass,
+                 double density,
+                 double temperature,
+                 double specificHeatCapacity)
+        : Substance(mass,
+                    density,
+                    temperature,
+                    specificHeatCapacity),
+          m_sideLength(std::cbrt(mass / density))
+    {
+    }
+
+    Metal::Metal(const Metal &copy)
+        : Substance(copy),
+          m_sideLength(copy.m_sideLength)
+    {
+    }
+
+    Metal::~Metal()
+    {
+    }
+
+    /** Operator overloads ****************************************************/
+
+    Metal &Metal::operator=(const Metal &copy)
+    {
+        if (&copy == this)
+        {
+            return *this;
+        }
+
         return *this;
     }
 
-    return *this;
-}
+    /** Getters and Setters ***************************************************/
 
-/* Getters */
+    double Metal::getSideLength()
+    {
+        return m_sideLength;
+    }
 
-double Metal::getSideLength()
-{
-    return m_sideLength;
-}
+    void Metal::setMass(double mass)
+    {
+        Substance::setMass(mass);
+        updateSideLength();
+    }
 
-void Metal::setMass(double mass)
-{
-    Substance::setMass(mass);
-    updateSideLength();
-}
+    void Metal::setDensity(double density)
+    {
+        Substance::setDensity(density);
+        updateSideLength();
+    }
 
-void Metal::setDensity(double density)
-{
-    Substance::setDensity(density);
-    updateSideLength();
-}
+    /** Other member functions ************************************************/
 
-/* Other methods */
+    void Metal::updateSideLength()
+    {
+        m_sideLength = std::cbrt(m_volume);
+    }
 
-void Metal::updateSideLength()
-{
-    m_sideLength = std::cbrt(m_volume);
-}
-
-void Metal::printProperties()
-{
-    Substance::printProperties();
-    std::cout << " SideLength: " << m_sideLength << "\n";
-}
+} // namespace vl

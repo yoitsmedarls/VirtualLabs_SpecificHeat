@@ -1,24 +1,43 @@
 #ifndef CALORIMETER
 #define CALORIMETER
 
-/**
- * @author @yoitsmedarls
- * @brief  A child of the Container class. Calorimeter is an isolated container
- *         with methods for Calorimeter-specific tasks in the simulation.
- */
-class Calorimeter
+#include "Container.hpp"
+
+namespace vl
 {
-private: // Class fields
-public:  // Special methods
-    Calorimeter();
-    Calorimeter(const Calorimeter &copy);
-    ~Calorimeter();
+    /**
+     * @author @yoitsmedarls
+     * @brief  A child of the Container class. Calorimeter is an isolated
+     *         container with methods for Calorimeter-specific tasks in
+     *         the simulation.
+     */
+    class Calorimeter : public Container
+    {
+    public: /** Properties ***************************************************/
+        double initTemperature;
+        bool isIsolated = true;
 
-public: // Operator overloads
-    Calorimeter &operator=(const Calorimeter &copy);
+    public: /** Special member functions **************************************/
+        Calorimeter();
+        Calorimeter(double diameter,
+                    double height);
+        Calorimeter(double diameter,
+                    double height,
+                    std::shared_ptr<Liquid> liquid,
+                    std::shared_ptr<Metal> metal);
+        Calorimeter(const Calorimeter &copy);
+        ~Calorimeter();
 
-public: // Getters and Setters
-public: // Other methods
-};
+    public: /** Operator overloads ********************************************/
+        Calorimeter &operator=(const Calorimeter &copy);
+
+    public: /** Getters and Setters *******************************************/
+        // get set
+
+    public: /** Other member functions ****************************************/
+        // others
+    };
+
+} // namespace vl
 
 #endif

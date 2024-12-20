@@ -2,35 +2,41 @@
 #define BEAKER
 
 #include "Container.hpp"
-#include "HeatPlate.hpp"
-#include "Laboratory.hpp"
 
-/**
- * @author @yoitsmedarls
- * @brief  A child of the Container class. Beaker is a non-isolated container
- *         with methods for Beaker-specific tasks in the simulation.
- */
-class Beaker : public Container, public Renderable
+namespace vl
 {
-private:
-public: // Special methods
-    Beaker();
-    Beaker(std::string textureFilePath,
-           double diameter,
-           double height);
-    Beaker(std::string textureFilePath,
-           double diameter,
-           double height,
-           std::shared_ptr<Liquid> liquid,
-           std::shared_ptr<Metal> metal);
-    Beaker(const Beaker &copy);
-    ~Beaker();
+    /**
+     * @author @yoitsmedarls
+     * @brief  A child of the Container class. Beaker is a non-isolated
+     *         container with methods for Beaker-specific tasks in the
+     *         simulation.
+     */
+    class Beaker : public Container
+    {
+    public: /** Properties ***************************************************/
+        bool isIsolated = false;
 
-public: // Operator overloads
-    Beaker &operator=(const Beaker &copy);
+    public: /** Special member functions **************************************/
+        Beaker();
+        Beaker(double diameter,
+               double height);
+        Beaker(double diameter,
+               double height,
+               std::shared_ptr<Liquid> liquid,
+               std::shared_ptr<Metal> metal);
+        Beaker(const Beaker &copy);
+        ~Beaker();
 
-public: // Getters and Setters
-public: // Other methods
-};
+    public: /** Operator overloads ********************************************/
+        Beaker &operator=(const Beaker &copy);
+
+    public: /** Getters and Setters *******************************************/
+        // getset
+
+    public: /** Other member functions ****************************************/
+        // others
+    };
+
+} // namespace vl
 
 #endif

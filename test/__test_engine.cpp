@@ -4,34 +4,27 @@
 #include <iostream>
 #include <memory>
 
-#include "PhysicsManager.hpp"
-#include "Renderer.hpp"
+#include "TemperatureManager.hpp"
 
 // Dimensions for the initial window launch
-#define WINDOW_HEIGHT 768
-#define WINDOW_WIDTH 1366
+#define INIT_WINDOW_WIDTH 1366
+#define INIT_WINDOW_HEIGHT 768
 
 // Allowance given to accommodate the desktop taskbar
 #define TASKBAR_SIZE 48
 
 // Framerate for the simulation
-#define FRAMERATE_LIMIT 60
+#define FRAMERATE_LIMIT 24
 
 int main()
 {
-    // Creates a non-resizeable window with specified dimensions and title
-    sf::RenderWindow window = sf::RenderWindow(
-        sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGHT),
-        "Virtual Labs: Specific Heat",
-        sf::Style::Titlebar | sf::Style::Close);
-
-    // Centers the window on the screen (accounting for the taskbar)
+    // Creates a centered window with an FPS limit
+    sf::RenderWindow window(
+        sf::VideoMode(INIT_WINDOW_WIDTH, INIT_WINDOW_HEIGHT),
+        "Virtual Labs: Specific Heat");
     window.setPosition(sf::Vector2i(
         ((sf::VideoMode::getDesktopMode().width - window.getSize().x) / 2),
-        ((sf::VideoMode::getDesktopMode().height - window.getSize().y) / 2) -
-            TASKBAR_SIZE));
-
-    // Adds a framerate limit to the window
+        ((sf::VideoMode::getDesktopMode().height - window.getSize().y) / 2) - TASKBAR_SIZE));
     window.setFramerateLimit(FRAMERATE_LIMIT);
 
     // Prints out valuable information to the console
@@ -45,33 +38,21 @@ int main()
               << "    height: " << window.getSize().y << "px" << "\n"
               << std::endl;
 
-    std::shared_ptr<Laboratory> lab = std::make_shared<Laboratory>("../assets/images/background.png");
-    lab->setOrigin(1, 1);
-    lab->setPositionRelativeToWindow(1, 1, window);
+    /**************************************************************************/
 
-    // std::shared_ptr<Liquid> water = std::make_shared<Liquid>("Water", "../assets/images/water.png", 100, 1, 25, 4.186, 100, 0);
-    // water->setOrigin(0, 1);
-    // water->setPositionRelativeToWindow(0, 1, window);
+    auto laboratory = std::make_shared<vl::Laboratory>();
 
-    // std::shared_ptr<Metal> aluminum = std::make_shared<Metal>("Aluminum", "../assets/images/metal.png", 50, 2.7, 20, 0.903);
-    // aluminum->setOrigin(2, 1);
-    // aluminum->setPositionRelativeToWindow(2, 1, window);
+    auto beaker = laboratory->CreateBeaker(5, 7);
+    auto calorimeter = laboratory->CreateCalorimeter(13.4, 16);
+    auto hotplate = laboratory->CreateHotPlate(500, 0.8);
+    auto scale = laboratory->CreateScale();
+    auto water = laboratory->CreateLiquid(100, 1, 25, 4.186, 100, 0);
+    auto aluminum = laboratory->CreateMetal(44, 2.7, 22, 0.9);
 
-    // std::shared_ptr<Container> myContainer = std::make_shared<Container>("MyContainer", 5, 7);
-    // water->setOrigin(0, 0);
-
-    PhysicsManager::Instance().addLaboratory(lab);
-    // PhysicsManager::Instance().addLiquid(water);
-    // PhysicsManager::Instance().addMetal(aluminum);
-
-    // First line gets to be in front
-    // Renderer::Instance().addRenderable(lab);
-    // Renderer::Instance().addRenderable(aluminum);
-    // Renderer::Instance().addRenderable(water);
+    /**************************************************************************/
 
     // Indicates program startup
-    std::cout
-        << "Launching window..." << std::endl;
+    std::cout << "Launching window..." << std::endl;
 
     // Starts the program loop
     while (window.isOpen())
@@ -111,21 +92,46 @@ int main()
                 break;
 
             // Handles user keypresses
-            case sf::Event::KeyPressed:
+            case sf::Event::KeyReleased:
                 std::cout << "KeyPress: ";
                 switch (event.key.code)
                 {
+                case sf::Keyboard::Q:
+                    std::cout << "Q\n";
+                    beaker->addLiquid(water);
+                    beaker->addMetal(aluminum);
+
+                    break;
+
                 case sf::Keyboard::W:
                     std::cout << "W\n";
+                    beaker->removeContainedLiquid();
+                    beaker->removeContainedMetal();
+
                     break;
-                case sf::Keyboard::A:
-                    std::cout << "A\n";
+
+                case sf::Keyboard::E:
+                    std::cout << "E\n";
+                    calorimeter->addLiquid(water);
+                    calorimeter->addMetal(aluminum);
+
                     break;
-                case sf::Keyboard::S:
-                    std::cout << "S\n";
+                case sf::Keyboard::R:
+                    std::cout << "R\n";
+                    calorimeter->removeContainedLiquid();
+                    calorimeter->removeContainedMetal();
+
                     break;
-                case sf::Keyboard::D:
-                    std::cout << "D\n";
+
+                case sf::Keyboard::T:
+                    std::cout << "T\n";
+                    hotplate->addBeaker(beaker);
+
+                    break;
+
+                case sf::Keyboard::Y:
+                    std::cout << "Y\n";
+                    hotplate->turnOnHotPlate();
                     break;
 
                 default:
@@ -141,8 +147,7 @@ int main()
 
         window.clear();
 
-        PhysicsManager::Instance().UpdateProperties(FRAMERATE_LIMIT);
-        Renderer::Instance().RenderAll(window);
+        vl::TemperatureManager::Instance().updateTemperatures(laboratory, FRAMERATE_LIMIT);
 
         window.display();
     }

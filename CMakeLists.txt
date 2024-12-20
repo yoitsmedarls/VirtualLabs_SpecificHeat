@@ -20,30 +20,37 @@ include_directories(
 )
 
 set(VIRTUAL_LABS_SRC
-    ${CMAKE_SOURCE_DIR}/src/Beaker.cpp
-    ${CMAKE_SOURCE_DIR}/include/Beaker.hpp
-    # ${CMAKE_SOURCE_DIR}/src/Button.cpp
-    # ${CMAKE_SOURCE_DIR}/include/Button.hpp
-    ${CMAKE_SOURCE_DIR}/src/Calorimeter.cpp
-    ${CMAKE_SOURCE_DIR}/include/Calorimeter.hpp
-    # ${CMAKE_SOURCE_DIR}/src/Clickable.cpp
-    # ${CMAKE_SOURCE_DIR}/include/Clickable.hpp
-    ${CMAKE_SOURCE_DIR}/src/Container.cpp
-    ${CMAKE_SOURCE_DIR}/include/Container.hpp
-    # ${CMAKE_SOURCE_DIR}/src/Entity.cpp
-    # ${CMAKE_SOURCE_DIR}/include/Entity.hpp
-    # ${CMAKE_SOURCE_DIR}/src/EntityManager.cpp
-    # ${CMAKE_SOURCE_DIR}/include/EntityManager.hpp
-    ${CMAKE_SOURCE_DIR}/src/HeatPlate.cpp
-    ${CMAKE_SOURCE_DIR}/include/HeatPlate.hpp
-    # ${CMAKE_SOURCE_DIR}/src/IComponent.cpp
-    # ${CMAKE_SOURCE_DIR}/include/IComponent.hpp
+    ${CMAKE_SOURCE_DIR}/src/Renderable.cpp
+    ${CMAKE_SOURCE_DIR}/include/Renderable.hpp
+
+    ${CMAKE_SOURCE_DIR}/src/TemperatureManager.cpp
+    ${CMAKE_SOURCE_DIR}/include/TemperatureManager.hpp
+
+
     ${CMAKE_SOURCE_DIR}/src/Laboratory.cpp
     ${CMAKE_SOURCE_DIR}/include/Laboratory.hpp
+
+    ${CMAKE_SOURCE_DIR}/src/HotPlate.cpp
+    ${CMAKE_SOURCE_DIR}/include/HotPlate.hpp
+    ${CMAKE_SOURCE_DIR}/src/Scale.cpp
+    ${CMAKE_SOURCE_DIR}/include/Scale.hpp
+    ${CMAKE_SOURCE_DIR}/src/Thermometer.cpp
+    ${CMAKE_SOURCE_DIR}/include/Thermometer.hpp
+
+    ${CMAKE_SOURCE_DIR}/src/Substance.cpp
+    ${CMAKE_SOURCE_DIR}/include/Substance.hpp    
     ${CMAKE_SOURCE_DIR}/src/Liquid.cpp
     ${CMAKE_SOURCE_DIR}/include/Liquid.hpp
     ${CMAKE_SOURCE_DIR}/src/Metal.cpp
     ${CMAKE_SOURCE_DIR}/include/Metal.hpp
+
+    ${CMAKE_SOURCE_DIR}/include/Container.hpp
+    ${CMAKE_SOURCE_DIR}/src/Container.cpp
+    ${CMAKE_SOURCE_DIR}/src/Beaker.cpp
+    ${CMAKE_SOURCE_DIR}/include/Beaker.hpp
+    ${CMAKE_SOURCE_DIR}/src/Calorimeter.cpp
+    ${CMAKE_SOURCE_DIR}/include/Calorimeter.hpp
+
     # ${CMAKE_SOURCE_DIR}/src/PhysicsComponent.cpp
     # ${CMAKE_SOURCE_DIR}/include/PhysicsComponent.hpp
     # ${CMAKE_SOURCE_DIR}/src/PhysicsManager.cpp
@@ -54,10 +61,6 @@ set(VIRTUAL_LABS_SRC
     # ${CMAKE_SOURCE_DIR}/include/RenderableComponent.hpp
     # ${CMAKE_SOURCE_DIR}/src/Renderer.cpp
     # ${CMAKE_SOURCE_DIR}/include/Renderer.hpp
-    ${CMAKE_SOURCE_DIR}/src/Scale.cpp
-    ${CMAKE_SOURCE_DIR}/include/Scale.hpp
-    ${CMAKE_SOURCE_DIR}/src/Substance.cpp
-    ${CMAKE_SOURCE_DIR}/include/Substance.hpp
 )
 
 add_library(virtual-labs STATIC ${VIRTUAL_LABS_SRC})
@@ -66,6 +69,9 @@ target_link_libraries(virtual-labs PRIVATE sfml-graphics sfml-window sfml-system
 
 add_executable(main test/__main.cpp)
 target_link_libraries(main PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
+
+add_executable(test_engine test/__test_engine.cpp)
+target_link_libraries(test_engine PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)
 
 # add_executable(test_substance test/__test_substance.cpp)
 # target_link_libraries(test_substance PRIVATE virtual-labs sfml-graphics sfml-window sfml-system)

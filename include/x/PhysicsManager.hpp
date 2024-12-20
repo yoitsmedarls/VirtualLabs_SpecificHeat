@@ -6,7 +6,7 @@
 #include <unordered_map>
 
 #include "Laboratory.hpp"
-#include "HeatPlate.hpp"
+#include "HotPlate.hpp"
 #include "Scale.hpp"
 #include "Substance.hpp"
 #include "Liquid.hpp"
@@ -19,10 +19,13 @@ class PhysicsManager
 {
 private:
     std::shared_ptr<Laboratory> m_laboratory;
-    std::shared_ptr<HeatPlate> m_HeatPlate;
+
+    std::shared_ptr<HotPlate> m_HotPlate;
     std::shared_ptr<Scale> m_scale;
+
     std::shared_ptr<Liquid> m_liquid;
     std::shared_ptr<Metal> m_metal;
+
     std::shared_ptr<Beaker> m_beaker;
     std::shared_ptr<Calorimeter> m_calorimeter;
 
@@ -36,8 +39,8 @@ public:
     void addLaboratory(std::shared_ptr<Laboratory> p_laboratory);
     std::shared_ptr<Laboratory> getLaboratory();
 
-    void addHeatPlate(std::shared_ptr<HeatPlate> p_HeatPlate);
-    std::shared_ptr<HeatPlate> getHeatPlate();
+    void addHotPlate(std::shared_ptr<HotPlate> p_HotPlate);
+    std::shared_ptr<HotPlate> getHotPlate();
 
     void addScale(std::shared_ptr<Scale> p_scale);
     std::shared_ptr<Scale> getScale();

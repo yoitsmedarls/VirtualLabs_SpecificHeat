@@ -65,9 +65,9 @@ int main()
     // lab->setOrigin(1, 1);
     // lab->setPositionRelativeToWindow(1, 1, window);
 
-    // std::shared_ptr<HeatPlate> heatPlate = std::make_shared<HeatPlate>(500, "../assets/images/hot_plate.png");
-    // heatPlate->setOrigin(1, 1);
-    // heatPlate->setPosition(175, 550);
+    // std::shared_ptr<HotPlate> HotPlate = std::make_shared<HotPlate>(500, "../assets/images/hot_plate.png");
+    // HotPlate->setOrigin(1, 1);
+    // HotPlate->setPosition(175, 550);
 
     // std::shared_ptr<Scale> scale = std::make_shared<Scale>("../assets/images/weighing_scale.png");
     // scale->setOrigin(1, 1);
@@ -86,7 +86,7 @@ int main()
     // // aluminum->setPositionRelativeToWindow(2, 1, window);
 
     // PhysicsManager::Instance().addLaboratory(lab);
-    // PhysicsManager::Instance().addHeatPlate(heatPlate);
+    // PhysicsManager::Instance().addHotPlate(HotPlate);
     // PhysicsManager::Instance().addScale(scale);
     // PhysicsManager::Instance().addBeaker(beaker);
     // // PhysicsManager::Instance().addLiquid(water);
@@ -95,18 +95,18 @@ int main()
     // // First line gets to be in front
     // Renderer::Instance().addRenderable("Beaker", beaker);
     // Renderer::Instance().addRenderable("Scale", scale);
-    // Renderer::Instance().addRenderable("HeatPlate", heatPlate);
+    // Renderer::Instance().addRenderable("HotPlate", HotPlate);
     // Renderer::Instance().addRenderable("Laboratory", lab);
 
     // // Renderer::Instance().addRenderable(water);
     // // Renderer::Instance().addRenderable(aluminum);
 
-    // sf::Text label_heatPlate = sf::Text("Hot Plate", textFont, 26);
-    // label_heatPlate.setFillColor(textColor);
-    // label_heatPlate.setOrigin(label_heatPlate.getGlobalBounds().getSize().x / 2,
-    //                           label_heatPlate.getGlobalBounds().getSize().y / 2);
-    // label_heatPlate.setPosition(heatPlate->getPosition().x,
-    //                             heatPlate->getPosition().y + 140);
+    // sf::Text label_HotPlate = sf::Text("Hot Plate", textFont, 26);
+    // label_HotPlate.setFillColor(textColor);
+    // label_HotPlate.setOrigin(label_HotPlate.getGlobalBounds().getSize().x / 2,
+    //                           label_HotPlate.getGlobalBounds().getSize().y / 2);
+    // label_HotPlate.setPosition(HotPlate->getPosition().x,
+    //                             HotPlate->getPosition().y + 140);
 
     // sf::Text label_scale = sf::Text("Weighing Scale", textFont, 26);
     // label_scale.setFillColor(textColor);
@@ -198,7 +198,7 @@ int main()
         // PhysicsManager::Instance().UpdateProperties(FRAMERATE_LIMIT);
         // Renderer::Instance().RenderAll(window);
 
-        // window.draw(label_heatPlate);
+        // window.draw(label_HotPlate);
         // window.draw(label_scale);
 
         window.display();
