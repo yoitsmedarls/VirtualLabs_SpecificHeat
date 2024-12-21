@@ -127,7 +127,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Container contains no liquid." << std::endl;
+            // std::cout << "ERROR: Container contains no liquid." << std::endl;
         }
     }
     void Container::addLiquid(std::shared_ptr<Liquid> liquid)
@@ -142,7 +142,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Cannot place Liquid inside Container." << std::endl;
+            // std::cout << "ERROR: Cannot place Liquid inside Container." << std::endl;
         }
     }
     void Container::removeContainedLiquid()
@@ -157,7 +157,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Container does not have a liquid." << std::endl;
+            // std::cout << "ERROR: Container does not have a liquid." << std::endl;
         }
     }
 
@@ -169,7 +169,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Container contains no metal." << std::endl;
+            // std::cout << "ERROR: Container contains no metal." << std::endl;
         }
     }
     void Container::addMetal(std::shared_ptr<Metal> metal)
@@ -184,7 +184,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Cannot place Metal inside Container." << std::endl;
+            // std::cout << "ERROR: Cannot place Metal inside Container." << std::endl;
         }
     }
     void Container::removeContainedMetal()
@@ -199,7 +199,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Container does not have a metal." << std::endl;
+            // std::cout << "ERROR: Container does not have a metal." << std::endl;
         }
     }
 

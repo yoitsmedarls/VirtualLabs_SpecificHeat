@@ -77,7 +77,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Beaker is empty or is in use!" << std::endl;
+            // std::cout << "ERROR: Beaker is empty or is in use!" << std::endl;
         }
     }
     void HotPlate::removeBeaker()
@@ -89,7 +89,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: No loaded beaker." << std::endl;
+            // std::cout << "ERROR: No loaded beaker." << std::endl;
         }
     }
 
@@ -111,7 +111,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: No loaded beaker to heat!" << std::endl;
+            // std::cout << "ERROR: No loaded beaker to heat!" << std::endl;
         }
     }
 }

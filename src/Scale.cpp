@@ -40,7 +40,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Beaker is empty or is in use!" << std::endl;
+            // std::cout << "ERROR: Beaker is empty or is in use!" << std::endl;
         }
     }
 
@@ -54,7 +54,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: No loaded beaker." << std::endl;
+            // std::cout << "ERROR: No loaded beaker." << std::endl;
         }
     }
 

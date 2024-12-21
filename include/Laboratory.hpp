@@ -20,13 +20,14 @@ namespace vl
     class Laboratory
     {
     protected: /** Properties *************************************************/
-        const double m_ambientTemperature = 20;
+        const double m_ambientTemperature = 25;
         std::shared_ptr<Beaker> m_beaker;
         std::shared_ptr<Calorimeter> m_calorimeter;
         std::shared_ptr<HotPlate> m_hotPlate;
         std::shared_ptr<Scale> m_scale;
         std::shared_ptr<Thermometer> m_thermometer;
-        std::shared_ptr<Liquid> m_liquid;
+        std::shared_ptr<Liquid> m_beakerLiquid;
+        std::shared_ptr<Liquid> m_calorimeterLiquid;
         std::shared_ptr<Metal> m_metal;
 
     public: /** Special member functions **************************************/
@@ -61,14 +62,23 @@ namespace vl
         std::shared_ptr<Thermometer> getThermometer();
         std::shared_ptr<Thermometer> CreateThermometer();
 
-        std::shared_ptr<Liquid> getLiquid();
-        std::shared_ptr<Liquid> CreateLiquid();
-        std::shared_ptr<Liquid> CreateLiquid(double mass,
-                                             double density,
-                                             double temperature,
-                                             double specificHeatCapacity,
-                                             double boilingPoint,
-                                             double freezingPoint);
+        std::shared_ptr<Liquid> getBeakerLiquid();
+        std::shared_ptr<Liquid> CreateBeakerLiquid();
+        std::shared_ptr<Liquid> CreateBeakerLiquid(double mass,
+                                                   double density,
+                                                   double temperature,
+                                                   double specificHeatCapacity,
+                                                   double boilingPoint,
+                                                   double freezingPoint);
+
+        std::shared_ptr<Liquid> getCalorimeterLiquid();
+        std::shared_ptr<Liquid> CreateCalorimeterLiquid();
+        std::shared_ptr<Liquid> CreateCalorimeterLiquid(double mass,
+                                                        double density,
+                                                        double temperature,
+                                                        double specificHeatCapacity,
+                                                        double boilingPoint,
+                                                        double freezingPoint);
 
         std::shared_ptr<Metal> getMetal();
         std::shared_ptr<Metal> CreateMetal();

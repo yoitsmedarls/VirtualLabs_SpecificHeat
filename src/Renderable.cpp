@@ -8,6 +8,14 @@ Renderable::Renderable(std::string textureFilePath)
     m_sprite.setTexture(m_texture);
 }
 
+Renderable::Renderable(std::string string, sf::Font &font, sf::Color &color, int fontSize)
+{
+    m_text.setString(string);
+    m_text.setFont(font);
+    m_text.setFillColor(color);
+    m_text.setCharacterSize(fontSize);
+}
+
 Renderable::Renderable(const Renderable &copy)
     : m_texture(copy.m_texture),
       m_sprite(copy.m_sprite)
@@ -28,7 +36,7 @@ Renderable &Renderable::operator=(const Renderable &copy)
     return *this;
 }
 
-sf::Sprite *Renderable::getRenderable()
+sf::Sprite *Renderable::getSprite()
 {
     return &m_sprite;
 }
@@ -39,7 +47,12 @@ void Renderable::setTextureFromFilePath(std::string textureFilePath)
     m_sprite.setTexture(m_texture);
 }
 
-void Renderable::setOrigin(int xIndex, int yIndex)
+void Renderable::setString(std::string string)
+{
+    m_text.setString(string);
+}
+
+void Renderable::setSpriteOrigin(int xIndex, int yIndex)
 {
     int xAnchor;
     int yAnchor;
@@ -83,33 +96,28 @@ void Renderable::setOrigin(int xIndex, int yIndex)
     m_sprite.setOrigin(xAnchor, yAnchor);
 }
 
-sf::Vector2f Renderable::getOrigin()
+sf::Vector2f Renderable::getSpriteOrigin()
 {
     return m_sprite.getOrigin();
 }
 
-void Renderable::setPosition(int x, int y)
+void Renderable::setTextOrigin(int xIndex, int yIndex)
 {
-    m_sprite.setPosition(x, y);
-}
-
-void Renderable::setPositionRelativeToWindow(int xIndex, int yIndex, sf::RenderWindow &window)
-{
-    int xPosition;
-    int yPosition;
+    int xAnchor;
+    int yAnchor;
 
     switch (xIndex)
     {
     case 0:
-        xPosition = 0;
+        xAnchor = 0;
         break;
 
     case 1:
-        xPosition = window.getSize().x / 2;
+        xAnchor = m_text.getGlobalBounds().getSize().x / 2;
         break;
 
     case 2:
-        xPosition = window.getSize().x;
+        xAnchor = m_text.getGlobalBounds().getSize().x;
         break;
 
     default:
@@ -119,30 +127,58 @@ void Renderable::setPositionRelativeToWindow(int xIndex, int yIndex, sf::RenderW
     switch (yIndex)
     {
     case 0:
-        yPosition = 0;
+        yAnchor = 0;
         break;
 
     case 1:
-        yPosition = window.getSize().y / 2;
+        yAnchor = m_text.getGlobalBounds().getSize().y / 2;
         break;
 
     case 2:
-        yPosition = window.getSize().y;
+        yAnchor = m_text.getGlobalBounds().getSize().y;
         break;
 
     default:
         break;
     }
 
-    m_sprite.setPosition(xPosition, yPosition);
+    m_text.setOrigin(xAnchor, yAnchor);
 }
 
-sf::Vector2f Renderable::getPosition()
+sf::Vector2f Renderable::getTextOrigin()
+{
+    return m_text.getOrigin();
+}
+
+void Renderable::setTextPosition(int x, int y)
+{
+    m_text.setPosition(x, y);
+}
+
+sf::Vector2f Renderable::getTextPosition()
+{
+    return m_text.getPosition();
+}
+
+void Renderable::setSpritePosition(int x, int y)
+{
+    m_sprite.setPosition(x, y);
+}
+
+sf::Vector2f Renderable::getSpritePosition()
 {
     return m_sprite.getPosition();
 }
 
 void Renderable::Render(sf::RenderWindow &window)
 {
-    window.draw(m_sprite);
+    if (m_sprite.getTexture() != nullptr)
+    {
+        window.draw(m_sprite);
+    }
+
+    if (m_text.getString() != "")
+    {
+        window.draw(m_text);
+    }
 }

@@ -6,18 +6,36 @@ Renderer &Renderer::Instance()
     return *instance;
 }
 
-std::shared_ptr<Renderable> Renderer::createRenderable(std::string name, std::string textureFilePath)
+std::shared_ptr<Renderable> Renderer::createRenderable(std::string textureFilePath)
 {
-    std::shared_ptr<Renderable> renderable = std::make_shared<Renderable>(textureFilePath);
-    m_renderables.insert(std::make_pair(name, renderable));
+    std::shared_ptr<Renderable> renderable =
+        std::make_shared<Renderable>(textureFilePath);
+
+    m_renderables.push_back(renderable);
+
+    return renderable;
+}
+
+std::shared_ptr<Renderable> Renderer::createRenderable(std::string string,
+                                                       sf::Font &font,
+                                                       sf::Color &color,
+                                                       int fontSize)
+{
+    std::shared_ptr<Renderable> renderable =
+        std::make_shared<Renderable>(string,
+                                     font,
+                                     color,
+                                     fontSize);
+
+    m_renderables.push_back(renderable);
 
     return renderable;
 }
 
 void Renderer::RenderAll(sf::RenderWindow &window)
 {
-    for (auto it = m_renderables.begin(); it != m_renderables.end(); it++)
+    for (int i = m_renderables.size() - 1; i >= 0; i--)
     {
-        it->second->Render(window);
+        m_renderables[i]->Render(window);
     }
 }

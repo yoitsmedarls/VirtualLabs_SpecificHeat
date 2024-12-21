@@ -7,12 +7,11 @@ namespace vl
     /** Special member functions **********************************************/
 
     Laboratory::Laboratory()
-        : m_ambientTemperature(20.0),
-          m_beaker(nullptr),
+        : m_beaker(nullptr),
           m_calorimeter(nullptr),
           m_hotPlate(nullptr),
           m_scale(nullptr),
-          m_liquid(nullptr),
+          m_beakerLiquid(nullptr),
           m_metal(nullptr)
     {
     }
@@ -23,7 +22,7 @@ namespace vl
           m_calorimeter(copy.m_calorimeter),
           m_hotPlate(copy.m_hotPlate),
           m_scale(copy.m_scale),
-          m_liquid(copy.m_liquid),
+          m_beakerLiquid(copy.m_beakerLiquid),
           m_metal(copy.m_metal)
     {
     }
@@ -54,7 +53,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Beaker is null" << std::endl;
+            // std::cout << "ERROR: Beaker is null" << std::endl;
             return m_beaker;
         }
     }
@@ -89,7 +88,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Calorimeter is null" << std::endl;
+            // std::cout << "ERROR: Calorimeter is null" << std::endl;
             return m_calorimeter;
         }
     }
@@ -122,7 +121,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: HotPlate is null" << std::endl;
+            // std::cout << "ERROR: HotPlate is null" << std::endl;
             return m_hotPlate;
         }
     }
@@ -155,7 +154,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Scale is null" << std::endl;
+            // std::cout << "ERROR: Scale is null" << std::endl;
             return m_scale;
         }
     }
@@ -177,7 +176,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Thermometer is null" << std::endl;
+            // std::cout << "ERROR: Thermometer is null" << std::endl;
             return m_thermometer;
         }
     }
@@ -191,34 +190,34 @@ namespace vl
         return thermometer;
     }
 
-    std::shared_ptr<Liquid> Laboratory::getLiquid()
+    std::shared_ptr<Liquid> Laboratory::getBeakerLiquid()
     {
-        if (m_liquid != nullptr)
+        if (m_beakerLiquid != nullptr)
         {
-            return m_liquid;
+            return m_beakerLiquid;
         }
         else
         {
-            std::cout << "ERROR: Liquid is null" << std::endl;
-            return m_liquid;
+            // std::cout << "ERROR: Liquid is null" << std::endl;
+            return m_beakerLiquid;
         }
     }
-    std::shared_ptr<Liquid> Laboratory::CreateLiquid()
+    std::shared_ptr<Liquid> Laboratory::CreateBeakerLiquid()
     {
         checkForContainers();
 
         std::shared_ptr<Liquid> liquid =
             std::make_shared<Liquid>();
-        m_liquid = liquid;
+        m_beakerLiquid = liquid;
 
         return liquid;
     }
-    std::shared_ptr<Liquid> Laboratory::CreateLiquid(double mass,
-                                                     double density,
-                                                     double temperature,
-                                                     double specificHeatCapacity,
-                                                     double boilingPoint,
-                                                     double freezingPoint)
+    std::shared_ptr<Liquid> Laboratory::CreateBeakerLiquid(double mass,
+                                                           double density,
+                                                           double temperature,
+                                                           double specificHeatCapacity,
+                                                           double boilingPoint,
+                                                           double freezingPoint)
     {
         checkForContainers();
 
@@ -229,7 +228,52 @@ namespace vl
                                      specificHeatCapacity,
                                      boilingPoint,
                                      freezingPoint);
-        m_liquid = liquid;
+        m_beakerLiquid = liquid;
+
+        return liquid;
+    }
+
+    std::shared_ptr<Liquid> Laboratory::getCalorimeterLiquid()
+    {
+        if (m_calorimeterLiquid != nullptr)
+        {
+            return m_calorimeterLiquid;
+        }
+        else
+        {
+            // std::cout << "ERROR: Liquid is null" << std::endl;
+            return m_calorimeterLiquid;
+        }
+    }
+
+    std::shared_ptr<Liquid> Laboratory::CreateCalorimeterLiquid()
+    {
+        checkForContainers();
+
+        std::shared_ptr<Liquid> liquid =
+            std::make_shared<Liquid>();
+        m_calorimeterLiquid = liquid;
+
+        return liquid;
+    }
+
+    std::shared_ptr<Liquid> Laboratory::CreateCalorimeterLiquid(double mass,
+                                                                double density,
+                                                                double temperature,
+                                                                double specificHeatCapacity,
+                                                                double boilingPoint,
+                                                                double freezingPoint)
+    {
+        checkForContainers();
+
+        std::shared_ptr<Liquid> liquid =
+            std::make_shared<Liquid>(mass,
+                                     density,
+                                     temperature,
+                                     specificHeatCapacity,
+                                     boilingPoint,
+                                     freezingPoint);
+        m_calorimeterLiquid = liquid;
 
         return liquid;
     }
@@ -242,7 +286,7 @@ namespace vl
         }
         else
         {
-            std::cout << "ERROR: Metal is null" << std::endl;
+            // std::cout << "ERROR: Metal is null" << std::endl;
             return m_metal;
         }
     }
@@ -277,7 +321,7 @@ namespace vl
     {
         if (m_beaker == nullptr && m_calorimeter == nullptr)
         {
-            std::cout << "ERROR: Create a container for the Substance first!" << std::endl;
+            // std::cout << "ERROR: Create a container for the Substance first!" << std::endl;
         }
 
     } // namespace vl
